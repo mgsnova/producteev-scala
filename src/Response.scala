@@ -1,0 +1,15 @@
+import scala.xml._
+
+class Response(format: String, response: ApiResponse) {
+  val xml_content = format match {
+    case "xml" => XML.loadString(response.content)
+  }
+
+  def success(): Boolean = {
+    response.code >= 200 && response.code < 300 
+  }
+
+  def error(): Boolean = {
+    response.code >= 300
+  }
+}
