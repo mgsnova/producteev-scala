@@ -75,12 +75,12 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new ResponseDashboardShowlist(format, res)
   }
 
-  def dashboardsView(token: String, idDashboard: Integer): ResponseDashboardShowlist = {
+  def dashboardsView(token: String, idDashboard: Integer): ResponseDashboardView = {
     val params = newReqParam
     params.add("token", token)
     params.add("id_dashboard", idDashboard.toString)
     val res = apiConnector.get("dashboards/view", params.urlParameter, format)
-    new ResponseDashboardShowlist(format, res)
+    new ResponseDashboardView(format, res)
   }
 
   // Tasks

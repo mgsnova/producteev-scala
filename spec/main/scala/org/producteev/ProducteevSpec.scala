@@ -125,5 +125,9 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
         res.user
       }
     }
+
+    it("should perform dashboards/view request") {
+      //TODO
+    }
   }
 }
