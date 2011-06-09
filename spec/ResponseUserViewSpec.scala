@@ -3,7 +3,7 @@ import org.scalatest.matchers.ShouldMatchers
 
 class ResponseUserViewSpec extends Spec with ShouldMatchers {
   describe("ResponseUserView") {
-    val xml_content = """<?xml version="1.0" encoding="ISO-8859-1"?>
+    val xmlContent = """<?xml version="1.0" encoding="ISO-8859-1"?>
       <user>
         <id_user>106531</id_user>
         <firstname>first</firstname>
@@ -20,7 +20,7 @@ class ResponseUserViewSpec extends Spec with ShouldMatchers {
         <facebooks/>
         <colleagues/>
       </user>"""
-    val response = new ResponseUserView("xml", new ApiResponse(200, xml_content))
+    val response = new ResponseUserView("xml", new ApiResponse(200, xmlContent))
  
     it("should return a user") {
       response.user.id_user should equal (106531)

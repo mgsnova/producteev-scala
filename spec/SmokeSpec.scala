@@ -18,22 +18,22 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       println(p.time.time)
 
-      val r = p.users_login(user, pass)
+      val r = p.usersLogin(user, pass)
       println(r.token)
       println(r.mail)
 
-      val d = p.dashboards_showlist(r.token)
+      val d = p.dashboardsShowlist(r.token)
       println(d.dashboard_list)
       println(d.dashboard_list.head)
       println(d.dashboard_list.head.id_dashboard)
 
-      val u = p.users_view(r.token)
+      val u = p.usersView(r.token)
       println(u.user)
 
-      val dd = p.users_set_default_dashboard(r.token, d.dashboard_list.head.id_dashboard)
+      val dd = p.usersSetDefaultDashboard(r.token, d.dashboard_list.head.id_dashboard)
       println(dd.user)
 
-      //val dv = p.dashboards_view(r.token, d.dashboard_list.head.id_dashboard)
+      //val dv = p.dashboardsView(r.token, d.dashboard_list.head.id_dashboard)
       //println(dv.dashboard_list.head)
     }
     /* */

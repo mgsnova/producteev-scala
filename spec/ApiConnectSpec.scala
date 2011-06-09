@@ -10,16 +10,16 @@ class ApiConnectSpec extends Spec with ShouldMatchers with EasyMockSugar {
     it("should return response on successful http communication") {
       val mockURLCreator = mock[ApiURLCreator]
       val mockURLConnectionWrapper = mock[URLConnectionWrapper]
-      val api_connect = new ApiConnect(mockURLCreator)
+      val apiConnect = new ApiConnect(mockURLCreator)
 
       expecting {
         call(mockURLCreator.connection("url", "param", "xml")).andReturn(mockURLConnectionWrapper)
-        call(mockURLConnectionWrapper.response_code).andReturn(200)
-        call(mockURLConnectionWrapper.input_string).andReturn("some xml")
+        call(mockURLConnectionWrapper.responseCode).andReturn(200)
+        call(mockURLConnectionWrapper.inputString).andReturn("some xml")
       }
 
       whenExecuting(mockURLCreator, mockURLConnectionWrapper) {
-        val res = api_connect.get("url", "param", "xml")
+        val res = apiConnect.get("url", "param", "xml")
         res.code should equal (200)
         res.content should equal ("some xml")
       }
@@ -28,17 +28,17 @@ class ApiConnectSpec extends Spec with ShouldMatchers with EasyMockSugar {
     it("should return response on non successful http communication") {
       val mockURLCreator = mock[ApiURLCreator]
       val mockURLConnectionWrapper = mock[URLConnectionWrapper]
-      val api_connect = new ApiConnect(mockURLCreator)
+      val apiConnect = new ApiConnect(mockURLCreator)
 /* TODO
       expecting {
         call(mockURLCreator.connection("url", "param", "xml")).andReturn(mockURLConnectionWrapper)
-        call(mockURLConnectionWrapper.response_code).andThrow(new java.io.IOException)
-        call(mockURLConnectionWrapper.response_code).andReturn(400)
-        call(mockURLConnectionWrapper.input_string).andReturn("some error xml")
+        call(mockURLConnectionWrapper.responseCode).andThrow(new java.io.IOException)
+        call(mockURLConnectionWrapper.responseCode).andReturn(400)
+        call(mockURLConnectionWrapper.inputString).andReturn("some error xml")
       }
 
       whenExecuting(mockURLCreator, mockURLConnectionWrapper) {
-        val res = api_connect.get("url", "param", "xml")
+        val res = apiConnect.get("url", "param", "xml")
         res.code should equal (400)
         res.content should equal ("some error xml")
       }

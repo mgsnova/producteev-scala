@@ -1,15 +1,15 @@
 import scala.xml._
 
 class ResponseUserLogin(format: String, response: ApiResponse) extends Response(format, response) {
-  def token(): String = {
+  def token: String = {
     format match {
-      case "xml" => (xml_content\\"token").text
+      case "xml" => (xmlContent\\"token").text
     }
   }
 
-  def mail(): String = {
+  def mail: String = {
     format match {
-      case "xml" => (xml_content\\"email").text
+      case "xml" => (xmlContent\\"email").text
     }
   }
 }

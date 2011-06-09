@@ -3,11 +3,11 @@ import org.scalatest.matchers.ShouldMatchers
 
 class ResponseUserLoginSpec extends Spec with ShouldMatchers {
   describe("ResponseUserLogin") {
-    val xml_content = """<login>
+    val xmlContent = """<login>
        <token>a_session_token</token>
        <email>user@provider.com</email>
      </login>"""
-    val response = new ResponseUserLogin("xml", new ApiResponse(200, xml_content))
+    val response = new ResponseUserLogin("xml", new ApiResponse(200, xmlContent))
 
     it("should return token from parsed content") {
       response.token should equal ("a_session_token")

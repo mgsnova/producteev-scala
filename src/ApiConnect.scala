@@ -1,12 +1,12 @@
-class ApiConnect(api_url_connection: ApiURLCreator) {
+class ApiConnect(apiUrlConnection: ApiURLCreator) {
   def get(path: String, parameter: String, format: String): ApiResponse = {
-    val urlconn = api_url_connection.connection(path, parameter, format)
+    val urlConn = apiUrlConnection.connection(path, parameter, format)
 
     try {    
-      new ApiResponse(urlconn.response_code, urlconn.input_string)
+      new ApiResponse(urlConn.responseCode, urlConn.inputString)
     } catch {
       case e: Exception => {
-        new ApiResponse(urlconn.response_code, urlconn.error_string)
+        new ApiResponse(urlConn.responseCode, urlConn.errorString)
       }
     }
   }

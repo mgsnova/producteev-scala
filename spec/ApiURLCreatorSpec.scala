@@ -3,10 +3,10 @@ import org.scalatest.matchers.ShouldMatchers
 
 class ApiURLCreatorSpec extends Spec with ShouldMatchers {
   describe("ApiURLCreator") {
-    val url_creator = new ApiURLCreator
+    val urlCreator = new ApiURLCreator
 
     it("should create an url") {
-      val url = url_creator.create("path", "parameter", "format")
+      val url = urlCreator.create("path", "parameter", "format")
       url.toString should equal ("https://api.producteev.com/path.format?parameter")
     }
 

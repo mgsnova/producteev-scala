@@ -4,7 +4,7 @@ import scala.xml._
 
 class XMLParseUserSpec extends Spec with ShouldMatchers {
   describe("XMLParseUser") {
-    val xml_content1 = """<?xml version="1.0" encoding="ISO-8859-1"?>
+    val xmlContent1 = """<?xml version="1.0" encoding="ISO-8859-1"?>
       <node>
         <user>
           <id_user>106531</id_user>
@@ -24,9 +24,9 @@ class XMLParseUserSpec extends Spec with ShouldMatchers {
           <dashboard_status>1</dashboard_status>
         </user>
       </node>"""
-    val xml_element1 = XML.loadString(xml_content1)   
+    val xmlElement1 = XML.loadString(xmlContent1)   
 
-    val xml_content2 = """<?xml version="1.0" encoding="ISO-8859-1"?>
+    val xmlContent2 = """<?xml version="1.0" encoding="ISO-8859-1"?>
       <user>
         <id_user>106531</id_user>
         <firstname>first</firstname>
@@ -43,10 +43,10 @@ class XMLParseUserSpec extends Spec with ShouldMatchers {
         <facebooks/>
         <colleagues/>
       </user>"""
-    val xml_element2 = XML.loadString(xml_content2)   
+    val xmlElement2 = XML.loadString(xmlContent2)   
 
     it("should parse xml tree (from list) to a user") {
-      val user = XMLParseUser.parse(xml_element1)
+      val user = XMLParseUser.parse(xmlElement1)
 
       user.id_user should equal (106531)
       user.firstname should equal ("first")
@@ -64,7 +64,7 @@ class XMLParseUserSpec extends Spec with ShouldMatchers {
     }
 
     it("should parse xml tree (from view) to a user") {
-      val user = XMLParseUser.parse(xml_element2)
+      val user = XMLParseUser.parse(xmlElement2)
 
       user.id_user should equal (106531)
       user.firstname should equal ("first")

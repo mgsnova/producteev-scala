@@ -6,15 +6,15 @@ import org.easymock.EasyMock.{expect => expectCall, replay, verify, createMock}
 class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
   describe("Producteev") {
     val credentials = new ApiCredentials("key", "secret")
-    val xml_result_time = """<?xml version="1.0" encoding="ISO-8859-1"?>
+    val xmlResultTime = """<?xml version="1.0" encoding="ISO-8859-1"?>
       <time>
         <value>Mon, 23 May 2011 16:22:41 -0400</value>
       </time>"""
-    val xml_result_users_login = """<login>
+    val xmlResultUsersLogin = """<login>
        <token>a_session_token</token>
        <email>user@provider.com</email>
      </login>"""
-    val xml_result_dashboards_showlist = """<?xml version="1.0" encoding="ISO-8859-1"?>
+    val xmlResultDashboardsShowlist = """<?xml version="1.0" encoding="ISO-8859-1"?>
       <dashboards>
         <node>
           <dashboard>
@@ -85,7 +85,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
           </dashboard>
         </node>
       </dashboards>"""
-    val xml_result_users_view = """<?xml version="1.0" encoding="ISO-8859-1"?>
+    val xml_result_usersView = """<?xml version="1.0" encoding="ISO-8859-1"?>
       <user>
         <id_user>106531</id_user>
         <firstname>first</firstname>
@@ -106,7 +106,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
     it("should perform time request") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")
-      val response = new ApiResponse(200, xml_result_time)
+      val response = new ApiResponse(200, xmlResultTime)
 
       expecting {
         call(mockApiConnect.get(
@@ -125,7 +125,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
     it("should perform users/login request") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")
-      val response = new ApiResponse(200, xml_result_users_login)
+      val response = new ApiResponse(200, xmlResultUsersLogin)
 
       expecting {
         call(mockApiConnect.get(
@@ -136,7 +136,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       }
 
       whenExecuting(mockApiConnect) {
-        val res = producteev.users_login("user", "pass")
+        val res = producteev.usersLogin("user", "pass")
         res.token
         res.mail   
       }
@@ -145,7 +145,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
     it("should perform dashboards/showlist request") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")
-      val response = new ApiResponse(200, xml_result_dashboards_showlist)
+      val response = new ApiResponse(200, xmlResultDashboardsShowlist)
 
       expecting {
         call(mockApiConnect.get(
@@ -156,7 +156,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       }
 
       whenExecuting(mockApiConnect) {
-        val res = producteev.dashboards_showlist("sessiontoken")
+        val res = producteev.dashboardsShowlist("sessiontoken")
         res.dashboard_list
       }
     }
@@ -164,7 +164,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
     it("should perform users/view request") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")
-      val response = new ApiResponse(200, xml_result_users_view)
+      val response = new ApiResponse(200, xml_result_usersView)
 
       expecting {
         call(mockApiConnect.get(
@@ -175,7 +175,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       }
 
       whenExecuting(mockApiConnect) {
-        val res = producteev.users_view("sessiontoken")
+        val res = producteev.usersView("sessiontoken")
         res.user
       }
     }
@@ -183,7 +183,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
     it("should perform users/view request with colleague id") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")
-      val response = new ApiResponse(200, xml_result_users_view)
+      val response = new ApiResponse(200, xml_result_usersView)
 
       expecting {
         call(mockApiConnect.get(
@@ -194,7 +194,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       }
 
       whenExecuting(mockApiConnect) {
-        val res = producteev.users_view("sessiontoken", 123)
+        val res = producteev.usersView("sessiontoken", 123)
         res.user
       }
     }
@@ -202,7 +202,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
     it("should set users default dashboard") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")
-      val response = new ApiResponse(200, xml_result_users_view)
+      val response = new ApiResponse(200, xml_result_usersView)
 
       expecting {
         call(mockApiConnect.get(
@@ -213,7 +213,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       }
 
       whenExecuting(mockApiConnect) {
-        val res = producteev.users_set_default_dashboard("sessiontoken", 123)
+        val res = producteev.usersSetDefaultDashboard("sessiontoken", 123)
         res.user
       }
     }

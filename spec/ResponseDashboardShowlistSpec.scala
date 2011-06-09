@@ -3,7 +3,7 @@ import org.scalatest.matchers.ShouldMatchers
 
 class ResponseDashboardShowlistSpec extends Spec with ShouldMatchers {
   describe("ResponseDashboardShowlistLogin") {
-    val xml_content = """<?xml version="1.0" encoding="ISO-8859-1"?>
+    val xmlContent = """<?xml version="1.0" encoding="ISO-8859-1"?>
       <dashboards>
         <node>
           <dashboard>
@@ -74,7 +74,7 @@ class ResponseDashboardShowlistSpec extends Spec with ShouldMatchers {
           </dashboard>
         </node>
       </dashboards>"""
-    val response = new ResponseDashboardShowlist("xml", new ApiResponse(200, xml_content))
+    val response = new ResponseDashboardShowlist("xml", new ApiResponse(200, xmlContent))
 
     it("should return list of dashboards") {
       response.dashboard_list.size should equal(2)

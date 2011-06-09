@@ -1,22 +1,22 @@
 import scala.collection.mutable.HashMap
 
-class RequestParameters(api_key: String, api_secret: String) {
+class RequestParameters(apiKey: String, apiSecret: String) {
   val map = new HashMap[String, String]
-  map += "api_key" -> api_key
+  map += "api_key" -> apiKey
   
   def add(key: String, value: String) {
     map += key -> value
   }
 
-  def signature(): String = {
-    MD5.sum(signature_raw())
+  def signature: String = {
+    MD5.sum(signatureRaw)
   }
 
-  def signature_raw(): String = {
-    map.toList.sortBy({_._1}).foldLeft("")((sum, pair) => sum + pair._1 + pair._2) + api_secret
+  def signatureRaw: String = {
+    map.toList.sortBy({_._1}).foldLeft("")((sum, pair) => sum + pair._1 + pair._2) + apiSecret
   }
 
-  def url_parameter(): String = {
+  def urlParameter: String = {
     val keys = map.toList.sortBy({_._1}).map(pair => pair._1 + "=" + pair._2).reduceLeft(_ + "&" + _)
     keys + "&api_sig=" + signature
   }

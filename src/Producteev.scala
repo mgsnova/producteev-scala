@@ -1,12 +1,12 @@
-class Producteev(api_connector: ApiConnect, credentials: ApiCredentials, format: String) {
-  private def new_req_param(): RequestParameters = {
+class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: String) {
+  private def newReqParam: RequestParameters = {
     new RequestParameters(credentials.key, credentials.secret) 
   }
 
   // Misc
 
-  def time(): ResponseTime = {
-    val res = api_connector.get("time", new_req_param.url_parameter, format)
+  def time: ResponseTime = {
+    val res = apiConnector.get("time", newReqParam.urlParameter, format)
     new ResponseTime(format, res)
   }
 
@@ -21,27 +21,27 @@ class Producteev(api_connector: ApiConnect, credentials: ApiCredentials, format:
     users/set_timezone
   */
 
-  def users_login(mail: String, pass: String): ResponseUserLogin = {
-    val params = new_req_param
+  def usersLogin(mail: String, pass: String): ResponseUserLogin = {
+    val params = newReqParam
     params.add("email", mail)
     params.add("password", pass)
-    val res = api_connector.get("users/login", params.url_parameter, format)
+    val res = apiConnector.get("users/login", params.urlParameter, format)
     new ResponseUserLogin(format, res)
   }
   
-  def users_view(token: String, id_colleague: Integer = -1) = {
-    val params = new_req_param
+  def usersView(token: String, idColleague: Integer = -1) = {
+    val params = newReqParam
     params.add("token", token)
-    if (id_colleague != -1) params.add("id_colleague", id_colleague.toString)
-    val res = api_connector.get("users/view", params.url_parameter, format)
+    if (idColleague != -1) params.add("id_colleague", idColleague.toString)
+    val res = apiConnector.get("users/view", params.urlParameter, format)
     new ResponseUserView(format, res)
   }
 
-  def users_set_default_dashboard(token: String, id_dashboard: Integer) = {
-    val params = new_req_param
+  def usersSetDefaultDashboard(token: String, idDashboard: Integer) = {
+    val params = newReqParam
     params.add("token", token)
-    params.add("id_dashboard", id_dashboard.toString)
-    val res = api_connector.get("users/set_default_dashboard", params.url_parameter, format)
+    params.add("id_dashboard", idDashboard.toString)
+    val res = apiConnector.get("users/set_default_dashboard", params.urlParameter, format)
     new ResponseUserView(format, res)
   }
 
@@ -64,18 +64,18 @@ class Producteev(api_connector: ApiConnect, credentials: ApiCredentials, format:
     dashboards/access
   */
 
-  def dashboards_showlist(token: String): ResponseDashboardShowlist = {
-    val params = new_req_param
+  def dashboardsShowlist(token: String): ResponseDashboardShowlist = {
+    val params = newReqParam
     params.add("token", token)
-    val res = api_connector.get("dashboards/show_list", params.url_parameter, format)
+    val res = apiConnector.get("dashboards/show_list", params.urlParameter, format)
     new ResponseDashboardShowlist(format, res)
   }
 
-  def dashboards_view(token: String, id_dashboard: Integer): ResponseDashboardShowlist = {
-    val params = new_req_param
+  def dashboardsView(token: String, idDashboard: Integer): ResponseDashboardShowlist = {
+    val params = newReqParam
     params.add("token", token)
-    params.add("id_dashboard", id_dashboard.toString)
-    val res = api_connector.get("dashboards/view", params.url_parameter, format)
+    params.add("id_dashboard", idDashboard.toString)
+    val res = apiConnector.get("dashboards/view", params.urlParameter, format)
     new ResponseDashboardShowlist(format, res)
   }
 

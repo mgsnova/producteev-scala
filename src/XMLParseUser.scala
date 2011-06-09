@@ -1,5 +1,5 @@
 object XMLParseUser {
-  def parse(xml_element: scala.xml.Node): User = {
+  def parse(xmlElement: scala.xml.Node): User = {
     var id_user = -1
     var firstname = ""
     var lastname = ""
@@ -14,7 +14,7 @@ object XMLParseUser {
     var sort_by = -1
     var dashboard_status = -1
 
-    val entries = xml_element match {
+    val entries = xmlElement match {
       case <user>{entries@_*}</user> => entries
       case <node>{_}<user>{entries@_*}</user>{_}</node> => entries
     }

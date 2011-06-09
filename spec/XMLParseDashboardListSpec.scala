@@ -4,7 +4,7 @@ import scala.xml._
 
 class XMLParseDashboardListSpec extends Spec with ShouldMatchers {
   describe("XMLParseDashboardList") {
-    val xml_content = """<?xml version="1.0" encoding="ISO-8859-1"?>
+    val xmlContent = """<?xml version="1.0" encoding="ISO-8859-1"?>
       <dashboards>
         <node>
           <dashboard>
@@ -75,10 +75,10 @@ class XMLParseDashboardListSpec extends Spec with ShouldMatchers {
           </dashboard>
         </node>
       </dashboards>"""
-    val xml_element = XML.loadString(xml_content)   
+    val xmlElement = XML.loadString(xmlContent)   
 
     it("should parse list of dashboard out of xml tree") {
-      val dashboard_list = XMLParseDashboardList.parse(xml_element)
+      val dashboard_list = XMLParseDashboardList.parse(xmlElement)
       dashboard_list.size should equal(2)
 
       dashboard_list.head.id_dashboard should equal(243972)

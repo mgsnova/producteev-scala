@@ -1,6 +1,6 @@
 object XMLParseDashboard {
-  def parse(xml_element: scala.xml.Node): Dashboard = {
-    xml_element match {        
+  def parse(xmlElement: scala.xml.Node): Dashboard = {
+    xmlElement match {        
       case <node>{_}<dashboard>{entries@_*}</dashboard>{_}</node> => {
         var id_dashboard = -1
         var id_creator = -1
@@ -11,7 +11,7 @@ object XMLParseDashboard {
         var deleted = -1
         var smart_labels = -1
         var needs_upgrade = -1
-        var accesslist: List[User] = List()
+        var accessList: List[User] = List()
 
         for (entry <- entries) {
           entry match {
@@ -25,13 +25,13 @@ object XMLParseDashboard {
             case <smart_labels>{_smart_labels}</smart_labels> => smart_labels = _smart_labels.text.toInt
             case <needs_upgrade>{_needs_upgrade}</needs_upgrade> => needs_upgrade = _needs_upgrade.text.toInt
             case <accesslist>{users@_*}</accesslist> => {
-              accesslist = users.filter(user => user.child.size > 0).map(user => XMLParseUser.parse(user)).toList
+              accessList = users.filter(user => user.child.size > 0).map(user => XMLParseUser.parse(user)).toList
             }           
             case _ =>
           }
         }
         return new Dashboard(id_dashboard, id_creator, title, write_ok, time_lastchange,
-                             status, deleted, smart_labels, needs_upgrade, accesslist)
+                             status, deleted, smart_labels, needs_upgrade, accessList)
       }
     }
   }
