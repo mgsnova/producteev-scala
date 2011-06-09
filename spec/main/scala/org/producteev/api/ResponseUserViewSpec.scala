@@ -3,26 +3,11 @@ package org.producteev.api
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 
+import org.producteev.TestXml
+
 class ResponseUserViewSpec extends Spec with ShouldMatchers {
   describe("ResponseUserView") {
-    val xmlContent = """<?xml version="1.0" encoding="ISO-8859-1"?>
-      <user>
-        <id_user>106531</id_user>
-        <firstname>first</firstname>
-        <lastname>last</lastname>
-        <company>co</company>
-        <email>mail@web.de</email>
-        <timezone>Europe/Berlin</timezone>
-        <time_signup>Wed, 11 May 2011 20:57:15 +0200</time_signup>
-        <lang>1</lang>
-        <avatar>http://producteev.com//static/images/default-avatar.jpg</avatar>
-        <deleted>0</deleted>
-        <default_dashboard>243972</default_dashboard>
-        <sort_by>4</sort_by>
-        <facebooks/>
-        <colleagues/>
-      </user>"""
-    val response = new ResponseUserView("xml", new ApiResponse(200, xmlContent))
+    val response = new ResponseUserView("xml", new ApiResponse(200, TestXml.userView))
  
     it("should return a user") {
       response.user.id_user should equal (106531)

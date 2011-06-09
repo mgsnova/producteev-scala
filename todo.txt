@@ -1,4 +1,3 @@
-- refactor xml in specs
 - spec dashboard view
 - implement other api calls
 - implement models ontop of api

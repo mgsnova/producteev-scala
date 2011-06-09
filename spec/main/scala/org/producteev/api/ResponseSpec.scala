@@ -3,11 +3,12 @@ package org.producteev.api
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 
+import org.producteev.TestXml
+
 class ResponseSpec extends Spec with ShouldMatchers {
   describe("Response") {
-    val xmlContent = """<tag>foo</tag>"""
-    val resSuccess = new Response("xml", new ApiResponse(200, xmlContent))
-    val resError = new Response("xml", new ApiResponse(400, xmlContent))
+    val resSuccess = new Response("xml", new ApiResponse(200, TestXml.dummy))
+    val resError = new Response("xml", new ApiResponse(400, TestXml.dummy))
 
     it("should indicate success on success") {
      resSuccess.success should be (true)
