@@ -37,7 +37,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
       val dd = p.usersSetDefaultDashboard(r.token, d.dashboard_list.head.id_dashboard)
       println(dd.user)
 
-      //val dv = p.dashboardsView(r.token, d.dashboard_list.head.id_dashboard)
+      val dv = p.dashboardsView(r.token, d.dashboard_list.head.id_dashboard)
       //println(dv.dashboard_list.head)
     }
     /* */
