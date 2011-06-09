@@ -16,7 +16,7 @@ class ApiCredentialsSpec extends Spec with ShouldMatchers {
     }
 
     it("should read credentials from files") {
-      // TODO
+      // TODO mock or write tempfiles
     }
   }
 }

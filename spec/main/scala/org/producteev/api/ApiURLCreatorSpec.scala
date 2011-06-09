@@ -13,7 +13,7 @@ class ApiURLCreatorSpec extends Spec with ShouldMatchers {
     }
 
     it("should return a connection") {
-      // TODO
+      // method connection simply returns new instance of URLConnectionWrapper which cannot be testet well
     }
   }
 }
