@@ -1,3 +1,7 @@
+package org.producteev
+
+import org.producteev.api._
+
 class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: String) {
   private def newReqParam: RequestParameters = {
     new RequestParameters(credentials.key, credentials.secret) 

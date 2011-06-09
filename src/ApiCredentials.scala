@@ -1,3 +1,5 @@
+package org.producteev.api
+
 import scala.io.Source
 
 object ApiCredentials {

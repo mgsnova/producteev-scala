@@ -1,4 +1,8 @@
+package org.producteev.api
+
 import java.net.URL
+
+import org.producteev.misc.URLConnectionWrapper
 
 class ApiURLCreator {
   val host = "https://api.producteev.com/"

@@ -1,3 +1,5 @@
+package org.producteev.api
+
 import scala.xml._
 
 class ResponseUserLogin(format: String, response: ApiResponse) extends Response(format, response) {

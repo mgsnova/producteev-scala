@@ -1,3 +1,5 @@
+package org.producteev.api
+
 import scala.xml._
 
 class Response(format: String, response: ApiResponse) {

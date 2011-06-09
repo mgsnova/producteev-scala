@@ -1,3 +1,5 @@
+package org.producteev.misc
+
 import java.net.{HttpURLConnection, URL}
 import javax.net.ssl.HttpsURLConnection;
 import io.Source

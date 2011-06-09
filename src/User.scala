@@ -1,3 +1,5 @@
+package org.producteev.model
+
 class User(
    val id_user: Integer,
    val firstname: String,

@@ -1,4 +1,8 @@
+package org.producteev.api
+
 import scala.collection.mutable.HashMap
+
+import org.producteev.misc.MD5
 
 class RequestParameters(apiKey: String, apiSecret: String) {
   val map = new HashMap[String, String]

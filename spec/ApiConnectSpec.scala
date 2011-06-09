@@ -1,9 +1,13 @@
+package org.producteev.api
+
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.mock.EasyMockSugar
 import org.easymock.EasyMock.{expect => expectCall, replay, verify, createMock}
 import java.net.{HttpURLConnection, URL}
 import javax.net.ssl.HttpsURLConnection;
+
+import org.producteev.misc._
 
 class ApiConnectSpec extends Spec with ShouldMatchers with EasyMockSugar {
   describe("ApiConnect") {

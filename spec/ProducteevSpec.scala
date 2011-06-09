@@ -1,7 +1,11 @@
+package org.producteev
+
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.mock.EasyMockSugar
 import org.easymock.EasyMock.{expect => expectCall, replay, verify, createMock}
+
+import org.producteev.api._
 
 class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
   describe("Producteev") {

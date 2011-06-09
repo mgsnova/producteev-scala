@@ -1,3 +1,5 @@
+package org.producteev.misc
+
 import java.security.MessageDigest
 
 object MD5 {

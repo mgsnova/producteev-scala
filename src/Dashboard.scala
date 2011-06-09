@@ -1,3 +1,5 @@
+package org.producteev.model
+
 class Dashboard(
   val id_dashboard: Integer,
   val id_creator: Integer,

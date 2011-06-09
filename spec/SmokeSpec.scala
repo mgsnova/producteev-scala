@@ -1,6 +1,10 @@
+package org.producteev
+
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 import scala.io.Source
+
+import org.producteev.api._
 
 class SmokeSpec extends Spec with ShouldMatchers {
   describe("Testing against live api") {

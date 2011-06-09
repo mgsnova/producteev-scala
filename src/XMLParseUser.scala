@@ -1,3 +1,7 @@
+package org.producteev.xml
+
+import org.producteev.model.User
+
 object XMLParseUser {
   def parse(xmlElement: scala.xml.Node): User = {
     var id_user = -1

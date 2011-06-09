@@ -1,3 +1,8 @@
+package org.producteev.xml
+
+import org.producteev.model.Dashboard
+import org.producteev.model.User
+
 object XMLParseDashboard {
   def parse(xmlElement: scala.xml.Node): Dashboard = {
     xmlElement match {        
