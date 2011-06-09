@@ -1,26 +1,4 @@
-- organize code in packages
+- refactor xml in specs
+- spec dashboard view
 - implement other api calls
 - implement models ontop of api
-
-- org.producteev.scala
-  Producteev.scala
-  - misc
-    MD5.scala
-    URLConnectionWrapper.scala
-  - api
-    ApiConnect.scala
-    ApiCredentials.scala
-    ApiResponse.scala
-    ApiURLCreator.scala
-    RequestParameters.scala
-    Response.scala
-    ResponseDashboardShowlist.scala
-    ResponseTime.scala
-    ResponseUserLogin.scala
-  - model
-    User.scala
-    Dashboard.scala
-  - xml
-    XMLParseDashboard.scala
-    XMLParseDashboardList.scala
-    XMLParseUser.scala
