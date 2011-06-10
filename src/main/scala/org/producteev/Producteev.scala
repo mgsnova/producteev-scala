@@ -51,8 +51,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
 
   // Dashboards
   /* missing
-    dashboards/create
-    dashboards/view
     dashboards/access
     dashboards/leave
     dashboards/set_title
@@ -67,6 +65,15 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     dashboards/needs_upgrade
     dashboards/access
   */
+
+  def dashboardsCreate(token: String, title: String): ResponseDashboardView = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("title", title)
+    println(params.urlParameter)
+    val res = apiConnector.get("dashboards/create", params.urlParameter, format)
+    new ResponseDashboardView(format, res)
+  }
 
   def dashboardsShowlist(token: String): ResponseDashboardShowlist = {
     val params = newReqParam

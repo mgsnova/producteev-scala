@@ -20,25 +20,48 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       val p = new Producteev(new ApiConnect(new ApiURLCreator), credentials, "xml")
 
+      // do time call
       println(p.time.time)
 
-      val r = p.usersLogin(user, pass)
-      println(r.token)
-      println(r.mail)
+      // do login
+      val resLogin = p.usersLogin(user, pass)
+      println(resLogin.token)
+      println(resLogin.mail)
 
-      val d = p.dashboardsShowlist(r.token)
-      println(d.dashboard_list)
-      println(d.dashboard_list.head)
-      println(d.dashboard_list.head.id_dashboard)
+      // do dashboard show list
+      val resDashboardList = p.dashboardsShowlist(resLogin.token)
+      println(resDashboardList.dashboard_list)
+      println(resDashboardList.dashboard_list.size)
+      println(resDashboardList.dashboard_list.head)
+      println(resDashboardList.dashboard_list.head.id_dashboard)
+      // resDashboardList.dashboard_list.size should be (2)
 
-      val u = p.usersView(r.token)
-      println(u.user)
+      // do user view
+      val resUser = p.usersView(resLogin.token)
+      println(resUser.user)
 
-      val dd = p.usersSetDefaultDashboard(r.token, d.dashboard_list.head.id_dashboard)
-      println(dd.user)
+      // do set default dashboard
+      val resSetDefaultDashboard = p.usersSetDefaultDashboard(
+        resLogin.token,
+        resDashboardList.dashboard_list.head.id_dashboard
+      )
+      println(resSetDefaultDashboard.user)
 
-      val dv = p.dashboardsView(r.token, d.dashboard_list.head.id_dashboard)
-      println(dv.dashboard)
+      // do dashboard view
+      val resDashboardView = p.dashboardsView(
+        resLogin.token,
+        resDashboardList.dashboard_list.head.id_dashboard
+      )
+      println(resDashboardView.dashboard)
+
+      /*
+      // do dashboard create
+      val resDashboardCreate = p.dashboardsCreate(
+        resLogin.token,
+        "testboard"
+      )
+      println(resDashboardCreate.dashboard)
+      */
     }
     /* */
   }
