@@ -193,4 +193,12 @@ object TestXml {
         </accesslist>
       </dashboard>
     </node>"""
+
+  val dashboardDeleteSuccess = """<stats>
+      <result>TRUE</result>
+    </stats>"""
+
+  val dashboardDeleteFailure = """<stats>
+      <result>FALSE</result>
+    </stats>"""
 }

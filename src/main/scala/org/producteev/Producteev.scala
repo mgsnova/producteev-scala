@@ -70,7 +70,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     val params = newReqParam
     params.add("token", token)
     params.add("title", title)
-    println(params.urlParameter)
     val res = apiConnector.get("dashboards/create", params.urlParameter, format)
     new ResponseDashboardView(format, res)
   }
@@ -88,6 +87,14 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("id_dashboard", idDashboard.toString)
     val res = apiConnector.get("dashboards/view", params.urlParameter, format)
     new ResponseDashboardView(format, res)
+  }
+
+  def dashboardsDelete(token: String, idDashboard: Integer): ResponseStats = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_dashboard", idDashboard.toString)
+    val res = apiConnector.get("dashboards/delete", params.urlParameter, format)
+    new ResponseStats(format, res)
   }
 
   // Tasks

@@ -54,14 +54,19 @@ class SmokeSpec extends Spec with ShouldMatchers {
       )
       println(resDashboardView.dashboard)
 
-      /*
       // do dashboard create
       val resDashboardCreate = p.dashboardsCreate(
         resLogin.token,
         "testboard"
       )
       println(resDashboardCreate.dashboard)
-      */
+
+      // do dashboard delete
+      val resDashboardDelete = p.dashboardsDelete(
+        resLogin.token,
+        resDashboardCreate.dashboard.id_dashboard
+      )
+      println(resDashboardDelete.resultSuccess)
     }
     /* */
   }
