@@ -53,6 +53,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
         resDashboardList.dashboard_list.head.id_dashboard
       )
       println(resDashboardView.dashboard)
+      println(resDashboardView.dashboard.accesslist)
 
       // do dashboard create
       val resDashboardCreate = p.dashboardsCreate(
