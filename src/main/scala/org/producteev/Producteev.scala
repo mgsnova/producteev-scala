@@ -65,10 +65,7 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
 
   // Dashboards
   /* missing
-    dashboards/access
     dashboards/leave
-    dashboards/set_smart_labels
-    dashboards/delete
     dashboards/tasks
     dashboards/confirm
     dashboards/refuse
@@ -76,7 +73,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     dashboards/invite_user_by_email
     dashboards/need_upgrade_list
     dashboards/needs_upgrade
-    dashboards/access
   */
 
   def dashboardsCreate(token: String, title: String) = {
