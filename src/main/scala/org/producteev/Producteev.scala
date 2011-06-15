@@ -21,8 +21,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     users/attach_facebook_id
     users/detach_facebook_id
     users/fblogin
-    users/set_sort_by
-    users/set_timezone
   */
 
   def usersLogin(mail: String, pass: String): ResponseUserLogin = {
@@ -46,6 +44,22 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("token", token)
     params.add("id_dashboard", idDashboard.toString)
     val res = apiConnector.get("users/set_default_dashboard", params.urlParameter, format)
+    new ResponseUserView(format, res)
+  }
+
+  def usersSetSortBy(token: String, sort: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("sort", sort.toString)
+    val res = apiConnector.get("users/set_sort_by", params.urlParameter, format)
+    new ResponseUserView(format, res)
+  }
+
+  def usersSetTimezone(token: String, timezone: String) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("timezone", timezone)
+    val res = apiConnector.get("users/set_timezone", params.urlParameter, format)
     new ResponseUserView(format, res)
   }
 

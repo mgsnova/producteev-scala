@@ -126,6 +126,44 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       }
     }
 
+    it("should set users sort by") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.userView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "users/set_sort_by",
+          "api_key=key&sort=1&token=sessiontoken&api_sig=7fd4b385264f6489881513386d88e620",
+          "xml"
+        )).andReturn(response)
+      }
+
+      whenExecuting(mockApiConnect) {
+        val res = producteev.usersSetSortBy("sessiontoken", 1)
+        res.user
+      }
+    }
+
+    it("should set users timezone") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.userView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "users/set_timezone",
+          "api_key=key&timezone=Europe/Berlin&token=sessiontoken&api_sig=7457d5229dd8c2875f0dd52e7420c406",
+          "xml"
+        )).andReturn(response)
+      }
+
+      whenExecuting(mockApiConnect) {
+        val res = producteev.usersSetTimezone("sessiontoken", "Europe/Berlin")
+        res.user
+      }
+    }
+
     it("should perform dashboards/view request") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")
