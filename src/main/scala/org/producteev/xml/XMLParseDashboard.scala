@@ -19,6 +19,7 @@ object XMLParseDashboard {
     val entries = xmlElement match {
       case <dashboard>{entries@_*}</dashboard> => entries
       case <node>{_}<dashboard>{entries@_*}</dashboard>{_}</node> => entries
+      case <node><dashboard>{entries@_*}</dashboard></node> => entries
     }
 
     for (entry <- entries) {

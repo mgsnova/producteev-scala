@@ -21,6 +21,7 @@ object XMLParseUser {
     val entries = xmlElement match {
       case <user>{entries@_*}</user> => entries
       case <node>{_}<user>{entries@_*}</user>{_}</node> => entries
+      case <node><user>{entries@_*}</user></node> => entries
     }
 
     for (entry <- entries) {

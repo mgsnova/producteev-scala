@@ -201,4 +201,74 @@ object TestXml {
   val dashboardDeleteFailure = """<stats>
       <result>FALSE</result>
     </stats>"""
+
+  val taskView = """<task>
+      <id_task>2377422</id_task>
+      <id_dashboard>143972</id_dashboard>
+      <id_creator>126530</id_creator>
+      <id_responsible>106530</id_responsible>
+      <assign_by></assign_by>
+      <time_created>Wed, 11 May 2011 21:06:50 +0200</time_created>
+      <title>blafasel</title>
+      <status>1</status>
+      <star>0</star>
+      <vote>0</vote>
+      <deadline></deadline>
+      <all_day>-1</all_day>
+      <reminder>0</reminder>
+      <repeating_interval></repeating_interval>
+      <repeating_value>1</repeating_value>
+      <hot>0</hot>
+      <progression>0</progression>
+      <public>0</public>
+      <uid_lastchange>106530</uid_lastchange>
+      <time_lastchange>Wed, 11 May 2011 21:06:50 +0200</time_lastchange>
+      <from>0</from>
+      <time_status></time_status>
+      <r>1</r>
+      <w>1</w>
+      <x>1</x>
+      <d>1</d>
+      <viewed>1</viewed>
+      <deleted>0</deleted>
+      <nb_note>0</nb_note>
+      <nb_new_note>0</nb_new_note>
+      <labels></labels>
+      <notes></notes>
+    </task>"""
+
+  val taskListItem = """<node><task>
+      <id_task>2377422</id_task>
+      <id_dashboard>143972</id_dashboard>
+      <id_creator>126530</id_creator>
+      <id_responsible>106530</id_responsible>
+      <assign_by></assign_by>
+      <time_created>Wed, 11 May 2011 21:06:50 +0200</time_created>
+      <title>blafasel</title>
+      <status>1</status>
+      <star>0</star>
+      <vote>0</vote>
+      <deadline></deadline>
+      <all_day>-1</all_day>
+      <reminder>0</reminder>
+      <repeating_interval></repeating_interval>
+      <repeating_value>1</repeating_value>
+      <hot>0</hot>
+      <progression>0</progression>
+      <public>0</public>
+      <uid_lastchange>106530</uid_lastchange>
+      <time_lastchange>Wed, 11 May 2011 21:06:50 +0200</time_lastchange>
+      <from>0</from>
+      <time_status></time_status>
+      <r>1</r>
+      <w>1</w>
+      <x>1</x>
+      <d>1</d>
+      <viewed>1</viewed>
+      <deleted>0</deleted>
+      <nb_note>0</nb_note>
+      <nb_new_note>0</nb_new_note>
+      <labels></labels>
+      <notes></notes>
+    </task></node>"""
 }
