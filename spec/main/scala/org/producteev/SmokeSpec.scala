@@ -83,6 +83,16 @@ class SmokeSpec extends Spec with ShouldMatchers {
         "blafasel"
       )
       println(resDashboardSetTitle.dashboard)
+
+      // do dashboards set smart labels
+      /* TODO not working
+      val resDashboardSetSmartLabels = p.dashboardsSetSmartLabels(
+        resLogin.token,
+        resDashboardCreate.dashboard.id_dashboard,
+        1
+      )
+      println(resDashboardSetSmartLabels.dashboard)
+      */ 
     }
     /* */
   }

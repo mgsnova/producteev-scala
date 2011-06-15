@@ -119,6 +119,15 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new ResponseDashboardView(format, res)
   }
 
+  def dashboardsSetSmartLabels(token: String, idDashboard: Integer, set: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_dashboard", idDashboard.toString)
+    params.add("value", set.toString)
+    val res = apiConnector.get("dashboards/set_smart_labels", params.urlParameter, format)
+    new ResponseDashboardView(format, res)
+  }
+
   // Tasks
   /* missing
     tasks/create
