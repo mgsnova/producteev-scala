@@ -220,5 +220,24 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
         res.resultSuccess
       }
     }
+
+    it("should perform dashboards/set_title request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.dashboardView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "dashboards/set_title",
+          "api_key=key&id_dashboard=123&title=yes&token=sessiontoken&api_sig=3c4ae8fb8b1d57c74b805ac73a686a07",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.dashboardsSetTitle("sessiontoken", 123, "yes")
+        res.dashboard
+      }
+    }
   }
 }

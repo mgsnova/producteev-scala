@@ -75,6 +75,14 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // do users set timezone
       val resUserSetTimezone = p.usersSetTimezone(resLogin.token, "Europe/Berlin")
       println(resUserSetTimezone.user)
+
+      // do dashboards set title
+      val resDashboardSetTitle = p.dashboardsSetTitle(
+        resLogin.token,
+        resDashboardCreate.dashboard.id_dashboard,
+        "blafasel"
+      )
+      println(resDashboardSetTitle.dashboard)
     }
     /* */
   }

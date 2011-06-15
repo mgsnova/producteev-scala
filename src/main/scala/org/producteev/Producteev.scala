@@ -23,7 +23,7 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     users/fblogin
   */
 
-  def usersLogin(mail: String, pass: String): ResponseUserLogin = {
+  def usersLogin(mail: String, pass: String) = {
     val params = newReqParam
     params.add("email", mail)
     params.add("password", pass)
@@ -67,7 +67,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
   /* missing
     dashboards/access
     dashboards/leave
-    dashboards/set_title
     dashboards/set_smart_labels
     dashboards/delete
     dashboards/tasks
@@ -80,7 +79,7 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     dashboards/access
   */
 
-  def dashboardsCreate(token: String, title: String): ResponseDashboardView = {
+  def dashboardsCreate(token: String, title: String) = {
     val params = newReqParam
     params.add("token", token)
     params.add("title", title)
@@ -88,14 +87,14 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new ResponseDashboardView(format, res)
   }
 
-  def dashboardsShowlist(token: String): ResponseDashboardShowlist = {
+  def dashboardsShowlist(token: String) = {
     val params = newReqParam
     params.add("token", token)
     val res = apiConnector.get("dashboards/show_list", params.urlParameter, format)
     new ResponseDashboardShowlist(format, res)
   }
 
-  def dashboardsView(token: String, idDashboard: Integer): ResponseDashboardView = {
+  def dashboardsView(token: String, idDashboard: Integer) = {
     val params = newReqParam
     params.add("token", token)
     params.add("id_dashboard", idDashboard.toString)
@@ -103,12 +102,21 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new ResponseDashboardView(format, res)
   }
 
-  def dashboardsDelete(token: String, idDashboard: Integer): ResponseStats = {
+  def dashboardsDelete(token: String, idDashboard: Integer) = {
     val params = newReqParam
     params.add("token", token)
     params.add("id_dashboard", idDashboard.toString)
     val res = apiConnector.get("dashboards/delete", params.urlParameter, format)
     new ResponseStats(format, res)
+  }
+
+  def dashboardsSetTitle(token: String, idDashboard: Integer, title: String) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_dashboard", idDashboard.toString)
+    params.add("title", title)
+    val res = apiConnector.get("dashboards/set_title", params.urlParameter, format)
+    new ResponseDashboardView(format, res)
   }
 
   // Tasks
