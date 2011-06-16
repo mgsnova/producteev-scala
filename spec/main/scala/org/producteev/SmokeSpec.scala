@@ -30,11 +30,11 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       // do dashboard show list
       val resDashboardList = p.dashboardsShowlist(resLogin.token)
-      println(resDashboardList.dashboard_list)
-      println(resDashboardList.dashboard_list.size)
-      println(resDashboardList.dashboard_list.head)
-      println(resDashboardList.dashboard_list.head.id_dashboard)
-      // resDashboardList.dashboard_list.size should be (2)
+      println(resDashboardList.dashboardList)
+      println(resDashboardList.dashboardList.size)
+      println(resDashboardList.dashboardList.head)
+      println(resDashboardList.dashboardList.head.id_dashboard)
+      // resDashboardList.dashboardList.size should be (2)
 
       // do user view
       val resUser = p.usersView(resLogin.token)
@@ -43,14 +43,14 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // do set default dashboard
       val resSetDefaultDashboard = p.usersSetDefaultDashboard(
         resLogin.token,
-        resDashboardList.dashboard_list.head.id_dashboard
+        resDashboardList.dashboardList.head.id_dashboard
       )
       println(resSetDefaultDashboard.user)
 
       // do dashboard view
       val resDashboardView = p.dashboardsView(
         resLogin.token,
-        resDashboardList.dashboard_list.head.id_dashboard
+        resDashboardList.dashboardList.head.id_dashboard
       )
       println(resDashboardView.dashboard)
       println(resDashboardView.dashboard.accesslist)
@@ -97,7 +97,10 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       // do tasks show list
       val resTaskList = p.tasksShowlist(resLogin.token)
-      println(resTaskList.task_list)
+      println(resTaskList.taskList)
+
+      val resTask = p.tasksView(resLogin.token, resTaskList.taskList.first.id_task)
+      println(resTask.task)
     }
     /* */
   }

@@ -10,13 +10,13 @@ class ResponseTaskShowlistSpec extends Spec with ShouldMatchers {
     val response = new ResponseTaskShowlist("xml", new ApiResponse(200, TestXml.taskList))
 
     it("should return list of tasks") {
-      response.task_list.size should equal(2)
+      response.taskList.size should equal(2)
 
-      response.task_list.head.id_task should equal(2377422)
-      response.task_list.head.title should equal("blafasel")
+      response.taskList.head.id_task should equal(2377422)
+      response.taskList.head.title should equal("blafasel")
 
-      response.task_list.last.id_task should equal(2377423)
-      response.task_list.last.title should equal("blafasel2")
+      response.taskList.last.id_task should equal(2377423)
+      response.taskList.last.title should equal("blafasel2")
     }
   }
 }

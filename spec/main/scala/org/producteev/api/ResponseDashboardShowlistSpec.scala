@@ -10,13 +10,13 @@ class ResponseDashboardShowlistSpec extends Spec with ShouldMatchers {
     val response = new ResponseDashboardShowlist("xml", new ApiResponse(200, TestXml.dashboardList))
 
     it("should return list of dashboards") {
-      response.dashboard_list.size should equal(2)
+      response.dashboardList.size should equal(2)
 
-      response.dashboard_list.head.id_dashboard should equal(243972)
-      response.dashboard_list.head.title should equal("privat")
+      response.dashboardList.head.id_dashboard should equal(243972)
+      response.dashboardList.head.title should equal("privat")
 
-      response.dashboard_list.last.id_dashboard should equal(250322)
-      response.dashboard_list.last.title should equal("second")
+      response.dashboardList.last.id_dashboard should equal(250322)
+      response.dashboardList.last.title should equal("second")
     }
   }
 }

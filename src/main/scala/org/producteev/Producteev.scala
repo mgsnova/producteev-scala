@@ -127,7 +127,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
   // Tasks
   /* missing
     tasks/create
-    tasks/view
     tasks/archived
     tasks/set_title
     tasks/set_status
@@ -158,6 +157,14 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     if (idDashboard != -1) params.add("id_dashboard", idDashboard.toString)
     val res = apiConnector.get("tasks/show_list", params.urlParameter, format)
     new ResponseTaskShowlist(format, res)
+  }
+
+  def tasksView(token: String, idTask: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    val res = apiConnector.get("tasks/view", params.urlParameter, format)
+    new ResponseTaskView(format, res)
   }
 
 

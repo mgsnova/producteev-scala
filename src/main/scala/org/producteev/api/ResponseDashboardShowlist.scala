@@ -6,7 +6,7 @@ import org.producteev.model.Dashboard
 import org.producteev.xml.XMLParseDashboardList
 
 class ResponseDashboardShowlist(format: String, response: ApiResponse) extends Response(format, response) {
-  def dashboard_list: List[Dashboard] = {
+  def dashboardList: List[Dashboard] = {
     format match {
       case "xml" => XMLParseDashboardList.parse(xmlContent)
     }
