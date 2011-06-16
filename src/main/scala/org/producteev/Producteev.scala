@@ -128,7 +128,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
   /* missing
     tasks/create
     tasks/view
-    tasks/show_list
     tasks/archived
     tasks/set_title
     tasks/set_status
@@ -152,6 +151,15 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/activity_view
     tasks/activities_get
   */
+
+  def tasksShowlist(token: String, idDashboard: Integer = -1 /*since: String, page: Integer*/) = {
+    val params = newReqParam
+    params.add("token", token)
+    if (idDashboard != -1) params.add("id_dashboard", idDashboard.toString)
+    val res = apiConnector.get("tasks/show_list", params.urlParameter, format)
+    new ResponseTaskShowlist(format, res)
+  }
+
 
   // Lables
   /* missing

@@ -95,6 +95,9 @@ class SmokeSpec extends Spec with ShouldMatchers {
       println(resDashboardSetSmartLabels.dashboard)
       */ 
 
+      // do tasks show list
+      val resTaskList = p.tasksShowlist(resLogin.token)
+      println(resTaskList.task_list)
     }
     /* */
   }

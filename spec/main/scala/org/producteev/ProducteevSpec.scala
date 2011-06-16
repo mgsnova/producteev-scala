@@ -258,5 +258,43 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
         res.dashboard
       }
     }
+
+    it("should perform tasks/show_list request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskList)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/show_list",
+          "api_key=key&token=sessiontoken&api_sig=904395f8ee9255d14ad500ce4bcdc3c9",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksShowlist("sessiontoken")
+        res.task_list
+      }
+    }
+
+    it("should perform tasks/show_list request with dashboard id") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskList)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/show_list",
+          "api_key=key&id_dashboard=42&token=sessiontoken&api_sig=b8cea9ad5c4b0fcf3672ab1540e009a5",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksShowlist("sessiontoken", 42)
+        res.task_list
+      }
+    }
   }
 }
