@@ -176,6 +176,11 @@ class SmokeSpec extends Spec with ShouldMatchers {
       println(resLabelCreate.label)
       resLabelCreate.label.title should be ("testlabel")
 
+      // do labels set title
+      val resLabelSetTitle = p.labelsSetTitle(resLogin.token, resLabelCreate.label.id_label, "testlabel2")
+      println(resLabelSetTitle.label)
+      resLabelSetTitle.label.title should be ("testlabel2")
+
       // do labels view
       val resLabelView = p.labelsView(resLogin.token, resLabelCreate.label.id_label)
       println(resLabelView.label)

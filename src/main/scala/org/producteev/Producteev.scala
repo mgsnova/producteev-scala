@@ -245,7 +245,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
   // Labels
   /* missing
     labels/tasks
-    labels/set_title
   */
 
   def labelsView(token: String, idLabel: Integer) = {
@@ -278,6 +277,15 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("id_label", idLabel.toString)
     val res = apiConnector.get("labels/delete", params.urlParameter, format)
     new ResponseStats(format, res)
+  }
+
+  def labelsSetTitle(token: String, idLabel: Integer, title: String) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_label", idLabel.toString)
+    params.add("title", title)
+    val res = apiConnector.get("labels/set_title", params.urlParameter, format)
+    new ResponseLabelView(format, res)
   }
 
   // Activities
