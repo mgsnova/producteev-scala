@@ -134,8 +134,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/my_team_tasks
     tasks/set_responsible
     tasks/unset_responsible
-    tasks/set_deadline
-    tasks/unset_deadline
     tasks/set_reminder
     tasks/set_repeating
     tasks/unset_repeating
@@ -200,6 +198,24 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("id_task", idTask.toString)
     params.add("star", star.toString)
     val res = apiConnector.get("tasks/set_star", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
+
+  def tasksSetDeadline(token: String, idTask: Integer, deadline: String, allDay: Integer = 0) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    params.add("deadline", deadline)
+    params.add("all_day", allDay.toString)
+    val res = apiConnector.get("tasks/set_deadline", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
+
+  def tasksUnsetDeadline(token: String, idTask: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    val res = apiConnector.get("tasks/unset_deadline", params.urlParameter, format)
     new ResponseTaskView(format, res)
   }
 

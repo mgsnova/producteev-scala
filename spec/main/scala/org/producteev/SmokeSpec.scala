@@ -125,6 +125,33 @@ class SmokeSpec extends Spec with ShouldMatchers {
       val resTaskSetStar = p.tasksSetStar(resLogin.token, resTask.task.id_task, 3)
       println(resTaskSetStar.task)
       resTaskSetStar.task.star should be (3)
+
+      // do tasks set deadline
+      val resTaskSetDeadline = p.tasksSetDeadline(
+        resLogin.token,
+        resTask.task.id_task,
+        "Fri, 23 Apr 2027 16:05:12 +0200"
+      )
+      println(resTaskSetDeadline.task)
+      resTaskSetDeadline.task.deadline should be ("Fri, 23 Apr 2027 16:05:12 +0200")
+      resTaskSetDeadline.task.all_day should be (0)
+
+      // do tasks set deadline with all_day
+      val resTaskSetDeadline2 = p.tasksSetDeadline(
+        resLogin.token,
+        resTask.task.id_task,
+        "Fri, 23 Apr 2027 17:05:12 +0200",
+        1
+      )
+      println(resTaskSetDeadline2.task)
+      resTaskSetDeadline2.task.deadline should be ("Fri, 23 Apr 2027 17:05:12 +0200")
+      // resTaskSetDeadline.task.all_day should be (1) TODO why not 1
+
+      // do tasks unset deadline
+      val resTaskUnsetDeadline = p.tasksUnsetDeadline(resLogin.token, resTask.task.id_task)
+      println(resTaskUnsetDeadline.task)
+      resTaskUnsetDeadline.task.deadline should be ("")
+      resTaskSetDeadline.task.all_day should be (0)
     }
     /* */
   }

@@ -391,5 +391,62 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
         res.task
       }
     }
+
+    it("should perform tasks/set_deadline request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/set_deadline",
+          "all_day=0&api_key=key&deadline=Fri%2C+23+Apr+2027+17%3A05%3A12+%2B0200&id_task=23&token=sessiontoken&api_sig=3a92f2748a7be94a252efb32d1c7a2b3",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksSetDeadline("sessiontoken", 23, "Fri, 23 Apr 2027 17:05:12 +0200")
+        res.task
+      }
+    }
+
+    it("should perform tasks/set_deadline request all day") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/set_deadline",
+          "all_day=1&api_key=key&deadline=Fri%2C+23+Apr+2027+17%3A05%3A12+%2B0200&id_task=23&token=sessiontoken&api_sig=52ce3b2b0b88e9b72e5cea13fd4071d4",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksSetDeadline("sessiontoken", 23, "Fri, 23 Apr 2027 17:05:12 +0200", 1)
+        res.task
+      }
+    }
+
+    it("should perform tasks/unset_deadline request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/unset_deadline",
+          "api_key=key&id_task=23&token=sessiontoken&api_sig=816f661c9b30fabdbb1eb3ad05968f66",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksUnsetDeadline("sessiontoken", 23)
+        res.task
+      }
+    }
   }
 }
