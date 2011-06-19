@@ -524,5 +524,43 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
         res.resultSuccess
       }
     }
+
+    it("should perform labels/show_list") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.labelList)
+
+      expecting {
+        call(mockApiConnect.get(
+          "labels/show_list",
+          "api_key=key&token=sessiontoken&api_sig=904395f8ee9255d14ad500ce4bcdc3c9",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.labelsShowlist("sessiontoken")
+        res.labelList
+      }
+    }
+
+    it("should perform labels/view") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.labelView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "labels/view",
+          "api_key=key&id_label=555&token=sessiontoken&api_sig=95fa37d0e95dca471f72198969817584",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.labelsView("sessiontoken", 555)
+        res.label
+      }
+    }
   }
 }
