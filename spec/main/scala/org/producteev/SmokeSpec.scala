@@ -152,6 +152,15 @@ class SmokeSpec extends Spec with ShouldMatchers {
       println(resTaskUnsetDeadline.task)
       resTaskUnsetDeadline.task.deadline should be ("")
       resTaskSetDeadline.task.all_day should be (0)
+
+      // do tasks create
+      val resTaskCreate = p.tasksCreateSimple(resLogin.token, "do it asap")
+      println(resTaskCreate.task)
+      resTaskCreate.task.title should be ("do it asap")
+
+      // do tasks delete
+      val resTaskDelete = p.tasksDelete(resLogin.token, resTaskCreate.task.id_task)
+      println(resTaskDelete.resultSuccess)
     }
     /* */
   }

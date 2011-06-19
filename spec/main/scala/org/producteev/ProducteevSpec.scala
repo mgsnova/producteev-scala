@@ -205,7 +205,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
     it("should perform dashboards/delete request") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")
-      val response = new ApiResponse(200, TestXml.dashboardDeleteSuccess)
+      val response = new ApiResponse(200, TestXml.statsSuccess)
 
       expecting {
         call(mockApiConnect.get(
@@ -446,6 +446,63 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       whenExecuting(mockApiConnect) {
         val res = producteev.tasksUnsetDeadline("sessiontoken", 23)
         res.task
+      }
+    }
+
+    it("should perform tasks/create request with title") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/create",
+          "api_key=key&title=wazzup&token=sessiontoken&api_sig=91cf56ad5ff8036e826f20f8ea5dfe57",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksCreateSimple("sessiontoken", "wazzup")
+        res.task
+      }
+    }
+
+    it("should perform tasks/create request with title, dashboard") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/create",
+          "api_key=key&id_dashboard=432&title=wazzup&token=sessiontoken&api_sig=c39f48a93aeca772d80f489b850e53be",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksCreateSimple("sessiontoken", "wazzup", 432)
+        res.task
+      }
+    }
+
+    it("should perform tasks/delete") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.statsSuccess)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/delete",
+          "api_key=key&id_task=123&token=sessiontoken&api_sig=a9db8af1b65de6ea2ae6056d4a8c4f40",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksDelete("sessiontoken", 123)
+        res.resultSuccess
       }
     }
   }

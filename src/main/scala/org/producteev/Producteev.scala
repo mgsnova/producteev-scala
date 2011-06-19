@@ -151,6 +151,23 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/activities_get
   */
 
+  def tasksCreateSimple(token: String, title: String, idDashboard: Integer = -1) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("title", title)
+    if (idDashboard != -1) params.add("id_dashboard", idDashboard.toString)
+    val res = apiConnector.get("tasks/create", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
+
+  def tasksDelete(token: String, idTask: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    val res = apiConnector.get("tasks/delete", params.urlParameter, format)
+    new ResponseStats(format, res)
+  }
+
   def tasksShowlist(token: String, idDashboard: Integer = -1 /*, since: String, page: Integer*/) = {
     val params = newReqParam
     params.add("token", token)

@@ -194,11 +194,11 @@ object TestXml {
       </dashboard>
     </node>"""
 
-  val dashboardDeleteSuccess = """<stats>
+  val statsSuccess = """<stats>
       <result>TRUE</result>
     </stats>"""
 
-  val dashboardDeleteFailure = """<stats>
+  val statsFailure = """<stats>
       <result>FALSE</result>
     </stats>"""
 
