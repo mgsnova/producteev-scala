@@ -3,7 +3,7 @@ package org.producteev.xml
 import org.producteev.model.Task
 
 object XMLParseTask {
-  def parse(xmlElement: scala.xml.Node): Task = {
+  def parse(xmlElement: scala.xml.Node) = {
     var id_task = -1
     var id_dashboard = -1
     var id_creator = -1

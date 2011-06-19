@@ -3,7 +3,7 @@ package org.producteev.xml
 import org.producteev.model.User
 
 object XMLParseUser {
-  def parse(xmlElement: scala.xml.Node): User = {
+  def parse(xmlElement: scala.xml.Node) = {
     var id_user = -1
     var firstname = ""
     var lastname = ""

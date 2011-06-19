@@ -343,4 +343,40 @@ object TestXml {
     </task></node>
     </tasks>
   """
+
+  val labelListItem = """<node>
+      <label>
+        <id_label>323451</id_label>
+        <id_creator>206530</id_creator>
+        <id_dashboard>243972</id_dashboard>
+        <title>foo</title>
+        <color>#6D763E</color>
+        <type>1</type>
+        <x/>
+        <y/>
+        <order/>
+        <time_create>Wed, 11 May 2011 21:04:20 +0200</time_create>
+        <time_lastchange>Wed, 11 May 2011 21:04:20 +0200</time_lastchange>
+        <from/>
+        <deleted>0</deleted>
+        <order_position/>
+      </label>
+    </node>"""
+
+  val labelView = """<label>
+      <id_label>323451</id_label>
+      <id_creator>206530</id_creator>
+      <id_dashboard>243972</id_dashboard>
+      <title>foo</title>
+      <color>#6D763E</color>
+      <type>1</type>
+      <x/>
+      <y/>
+      <order/>
+      <time_create>Wed, 11 May 2011 21:04:20 +0200</time_create>
+      <time_lastchange>Wed, 11 May 2011 21:04:20 +0200</time_lastchange>
+      <from/>
+      <deleted>0</deleted>
+      <order_position/>
+    </label>"""
 }

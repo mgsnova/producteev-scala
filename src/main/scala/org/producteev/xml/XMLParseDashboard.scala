@@ -4,7 +4,7 @@ import org.producteev.model.Dashboard
 import org.producteev.model.User
 
 object XMLParseDashboard {
-  def parse(xmlElement: scala.xml.Node): Dashboard = {
+  def parse(xmlElement: scala.xml.Node) = {
     var id_dashboard = -1
     var id_creator = -1
     var title = ""
@@ -39,7 +39,8 @@ object XMLParseDashboard {
         case _ =>
       }
     }
-    return new Dashboard(id_dashboard, id_creator, title, write_ok, time_lastchange,
-                         status, deleted, smart_labels, needs_upgrade, accessList)
+
+    new Dashboard(id_dashboard, id_creator, title, write_ok, time_lastchange,
+                  status, deleted, smart_labels, needs_upgrade, accessList)
   }
 }
