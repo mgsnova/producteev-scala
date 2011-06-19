@@ -62,23 +62,6 @@ class SmokeSpec extends Spec with ShouldMatchers {
       )
       println(resDashboardCreate.dashboard)
 
-      // do dashboard delete
-      val resDashboardDelete = p.dashboardsDelete(
-        resLogin.token,
-        resDashboardCreate.dashboard.id_dashboard
-      )
-      println(resDashboardDelete.resultSuccess)
-
-      // do users set sort by
-      val resUserSetSortBy = p.usersSetSortBy(resLogin.token, 1)
-      println(resUserSetSortBy.user)
-      resUserSetSortBy.user.sort_by should be (1)
-
-      // do users set timezone
-      val resUserSetTimezone = p.usersSetTimezone(resLogin.token, "Europe/Berlin")
-      println(resUserSetTimezone.user)
-      resUserSetTimezone.user.timezone should be ("Europe/Berlin")
-
       // do dashboards set title
       val resDashboardSetTitle = p.dashboardsSetTitle(
         resLogin.token,
@@ -98,6 +81,23 @@ class SmokeSpec extends Spec with ShouldMatchers {
       println(resDashboardSetSmartLabels.dashboard)
       */ 
 
+      // do dashboard delete
+      val resDashboardDelete = p.dashboardsDelete(
+        resLogin.token,
+        resDashboardCreate.dashboard.id_dashboard
+      )
+      println(resDashboardDelete.resultSuccess)
+
+      // do users set sort by
+      val resUserSetSortBy = p.usersSetSortBy(resLogin.token, 1)
+      println(resUserSetSortBy.user)
+      resUserSetSortBy.user.sort_by should be (1)
+
+      // do users set timezone
+      val resUserSetTimezone = p.usersSetTimezone(resLogin.token, "Europe/Berlin")
+      println(resUserSetTimezone.user)
+      resUserSetTimezone.user.timezone should be ("Europe/Berlin")
+
       // do tasks show list
       val resTaskList = p.tasksShowlist(resLogin.token)
       println(resTaskList.taskList)
@@ -111,25 +111,30 @@ class SmokeSpec extends Spec with ShouldMatchers {
       val resMyTaskList = p.tasksMyTasks(resLogin.token)
       println(resMyTaskList.taskList)
 
+      // do tasks create
+      val resTaskCreate = p.tasksCreateSimple(resLogin.token, "do it asap")
+      println(resTaskCreate.task)
+      resTaskCreate.task.title should be ("do it asap")
+
       // do tasks set title
-      val resTaskSetTitle = p.tasksSetTitle(resLogin.token, resTask.task.id_task, "do it")
+      val resTaskSetTitle = p.tasksSetTitle(resLogin.token, resTaskCreate.task.id_task, "do it")
       println(resTaskSetTitle.task)
       resTaskSetTitle.task.title should be ("do it")
 
       // do tasks set status
-      val resTaskSetStatus = p.tasksSetStatus(resLogin.token, resTask.task.id_task, 1)
+      val resTaskSetStatus = p.tasksSetStatus(resLogin.token, resTaskCreate.task.id_task, 1)
       println(resTaskSetStatus.task)
       resTaskSetStatus.task.status should be (1)
 
       // do tasks set star
-      val resTaskSetStar = p.tasksSetStar(resLogin.token, resTask.task.id_task, 3)
+      val resTaskSetStar = p.tasksSetStar(resLogin.token, resTaskCreate.task.id_task, 3)
       println(resTaskSetStar.task)
       resTaskSetStar.task.star should be (3)
 
       // do tasks set deadline
       val resTaskSetDeadline = p.tasksSetDeadline(
         resLogin.token,
-        resTask.task.id_task,
+        resTaskCreate.task.id_task,
         "Fri, 23 Apr 2027 16:05:12 +0200"
       )
       println(resTaskSetDeadline.task)
@@ -139,7 +144,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // do tasks set deadline with all_day
       val resTaskSetDeadline2 = p.tasksSetDeadline(
         resLogin.token,
-        resTask.task.id_task,
+        resTaskCreate.task.id_task,
         "Fri, 23 Apr 2027 17:05:12 +0200",
         1
       )
@@ -148,15 +153,15 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // resTaskSetDeadline.task.all_day should be (1) TODO why not 1
 
       // do tasks unset deadline
-      val resTaskUnsetDeadline = p.tasksUnsetDeadline(resLogin.token, resTask.task.id_task)
+      val resTaskUnsetDeadline = p.tasksUnsetDeadline(resLogin.token, resTaskCreate.task.id_task)
       println(resTaskUnsetDeadline.task)
       resTaskUnsetDeadline.task.deadline should be ("")
       resTaskSetDeadline.task.all_day should be (0)
 
-      // do tasks create
-      val resTaskCreate = p.tasksCreateSimple(resLogin.token, "do it asap")
-      println(resTaskCreate.task)
-      resTaskCreate.task.title should be ("do it asap")
+      // do tasks set reminder
+      val resTaskSetReminder = p.tasksSetReminder(resLogin.token, resTask.task.id_task, 4)
+      println(resTaskSetReminder.task)
+      resTaskSetReminder.task.reminder should be (4)
 
       // do tasks delete
       val resTaskDelete = p.tasksDelete(resLogin.token, resTaskCreate.task.id_task)

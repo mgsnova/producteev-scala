@@ -411,6 +411,25 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       }
     }
 
+    it("should perform tasks/set_reminder request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/set_reminder",
+          "api_key=key&id_task=23&reminder=6&token=sessiontoken&api_sig=d7d082dcda78a4bf26442bc0337311c0",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksSetReminder("sessiontoken", 23, 6)
+        res.task
+      }
+    }
+
     it("should perform tasks/set_deadline request all day") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")

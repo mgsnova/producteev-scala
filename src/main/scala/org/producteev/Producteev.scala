@@ -129,15 +129,12 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
 
   // Tasks
   /* missing
-    tasks/create
     tasks/archived
     tasks/my_team_tasks
     tasks/set_responsible
     tasks/unset_responsible
-    tasks/set_reminder
     tasks/set_repeating
     tasks/unset_repeating
-    tasks/delete
     dashboards/access -> included in dashboards/(view|show_list) ?
     tasks/labels
     tasks/change_labels
@@ -233,6 +230,15 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("token", token)
     params.add("id_task", idTask.toString)
     val res = apiConnector.get("tasks/unset_deadline", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
+  
+  def tasksSetReminder(token: String, idTask: Integer, reminder: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    params.add("reminder", reminder.toString)
+    val res = apiConnector.get("tasks/set_reminder", params.urlParameter, format)
     new ResponseTaskView(format, res)
   }
 
