@@ -166,6 +166,11 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // do tasks delete
       val resTaskDelete = p.tasksDelete(resLogin.token, resTaskCreate.task.id_task)
       println(resTaskDelete.resultSuccess)
+
+      // do labels show list
+      val resLabelList = p.labelsShowlist(resLogin.token)
+      println(resLabelList.labelList)
+
     }
     /* */
   }
