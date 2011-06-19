@@ -7,6 +7,8 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new RequestParameters(credentials.key, credentials.secret) 
   }
 
+  // API from date 2011.06.19
+
   // Misc
 
   def time: ResponseTime = {
@@ -65,14 +67,15 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
 
   // Dashboards
   /* missing
+    dashboards/access -> included in dasboard/(view|show_list) ?
     dashboards/leave
-    dashboards/tasks
+    dashboards/tasks -> can be done with tasks/show_list ?
     dashboards/confirm
     dashboards/refuse
     dashboards/invite_user_by_id
     dashboards/invite_user_by_email
-    dashboards/need_upgrade_list
-    dashboards/needs_upgrade
+    dashboards/need_upgrade_list -> what for?
+    dashboards/needs_upgrade -> what for?
   */
 
   def dashboardsCreate(token: String, title: String) = {
@@ -83,7 +86,7 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new ResponseDashboardView(format, res)
   }
 
-  def dashboardsShowlist(token: String) = {
+  def dashboardsShowlist(token: String /*, since: String, page: Integer*/) = {
     val params = newReqParam
     params.add("token", token)
     val res = apiConnector.get("dashboards/show_list", params.urlParameter, format)
@@ -128,6 +131,7 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
   /* missing
     tasks/create
     tasks/archived
+    tasks/my_team_tasks
     tasks/set_title
     tasks/set_status
     tasks/set_star
@@ -139,6 +143,7 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/set_repeating
     tasks/unset_repeating
     tasks/delete
+    dashboards/access -> included in dashboards/(view|show_list) ?
     tasks/labels
     tasks/change_labels
     tasks/set_workspace
@@ -151,7 +156,7 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/activities_get
   */
 
-  def tasksShowlist(token: String, idDashboard: Integer = -1 /*since: String, page: Integer*/) = {
+  def tasksShowlist(token: String, idDashboard: Integer = -1 /*, since: String, page: Integer*/) = {
     val params = newReqParam
     params.add("token", token)
     if (idDashboard != -1) params.add("id_dashboard", idDashboard.toString)
@@ -165,6 +170,13 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("id_task", idTask.toString)
     val res = apiConnector.get("tasks/view", params.urlParameter, format)
     new ResponseTaskView(format, res)
+  }
+
+  def tasksMyTasks(token: String /*, since: String, page: Integer*/) = {
+    val params = newReqParam
+    params.add("token", token)
+    val res = apiConnector.get("tasks/my_tasks", params.urlParameter, format)
+    new ResponseTaskShowlist(format, res)
   }
 
 

@@ -34,7 +34,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
       println(resDashboardList.dashboardList.size)
       println(resDashboardList.dashboardList.head)
       println(resDashboardList.dashboardList.head.id_dashboard)
-      // resDashboardList.dashboardList.size should be (2)
+      resDashboardList.dashboardList.size should be (2)
 
       // do user view
       val resUser = p.usersView(resLogin.token)
@@ -99,8 +99,13 @@ class SmokeSpec extends Spec with ShouldMatchers {
       val resTaskList = p.tasksShowlist(resLogin.token)
       println(resTaskList.taskList)
 
+      // do task view
       val resTask = p.tasksView(resLogin.token, resTaskList.taskList.first.id_task)
       println(resTask.task)
+
+      // do tasks my tasks 
+      val resMyTaskList = p.tasksMyTasks(resLogin.token)
+      println(resMyTaskList.taskList)
     }
     /* */
   }
