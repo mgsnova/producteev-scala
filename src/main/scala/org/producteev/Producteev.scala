@@ -244,12 +244,19 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
 
   // Lables
   /* missing
-    labels/view
     labels/create
     labels/delete
     labels/tasks
     labels/set_title
   */
+
+  def labelsView(token: String, idLabel: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_label", idLabel.toString)
+    val res = apiConnector.get("labels/view", params.urlParameter, format)
+    new ResponseLabelView(format, res)
+  }
 
   def labelsShowlist(token: String /*, since: String, page: Integer*/) = {
     val params = newReqParam
