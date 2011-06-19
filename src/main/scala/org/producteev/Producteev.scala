@@ -132,9 +132,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/create
     tasks/archived
     tasks/my_team_tasks
-    tasks/set_title
-    tasks/set_status
-    tasks/set_star
     tasks/set_responsible
     tasks/unset_responsible
     tasks/set_deadline
@@ -179,6 +176,32 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new ResponseTaskShowlist(format, res)
   }
 
+  def tasksSetTitle(token: String, idTask: Integer, title: String) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    params.add("title", title)
+    val res = apiConnector.get("tasks/set_title", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
+
+  def tasksSetStatus(token: String, idTask: Integer, status: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    params.add("status", status.toString)
+    val res = apiConnector.get("tasks/set_status", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
+
+  def tasksSetStar(token: String, idTask: Integer, star: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    params.add("star", star.toString)
+    val res = apiConnector.get("tasks/set_star", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
 
   // Lables
   /* missing

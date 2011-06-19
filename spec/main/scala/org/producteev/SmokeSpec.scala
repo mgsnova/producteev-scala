@@ -72,10 +72,12 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // do users set sort by
       val resUserSetSortBy = p.usersSetSortBy(resLogin.token, 1)
       println(resUserSetSortBy.user)
+      resUserSetSortBy.user.sort_by should be (1)
 
       // do users set timezone
       val resUserSetTimezone = p.usersSetTimezone(resLogin.token, "Europe/Berlin")
       println(resUserSetTimezone.user)
+      resUserSetTimezone.user.timezone should be ("Europe/Berlin")
 
       // do dashboards set title
       val resDashboardSetTitle = p.dashboardsSetTitle(
@@ -84,6 +86,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
         "blafasel"
       )
       println(resDashboardSetTitle.dashboard)
+      resDashboardSetTitle.dashboard.title should be ("blafasel")
 
       // do dashboards set smart labels
       /* TODO not working
@@ -102,10 +105,26 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // do task view
       val resTask = p.tasksView(resLogin.token, resTaskList.taskList.first.id_task)
       println(resTask.task)
+      resTask.task.id_task should be (resTaskList.taskList.first.id_task)
 
       // do tasks my tasks 
       val resMyTaskList = p.tasksMyTasks(resLogin.token)
       println(resMyTaskList.taskList)
+
+      // do tasks set title
+      val resTaskSetTitle = p.tasksSetTitle(resLogin.token, resTask.task.id_task, "doit")
+      println(resTaskSetTitle.task)
+      resTaskSetTitle.task.title should be ("doit")
+
+      // do tasks set status
+      val resTaskSetStatus = p.tasksSetStatus(resLogin.token, resTask.task.id_task, 1)
+      println(resTaskSetStatus.task)
+      resTaskSetStatus.task.status should be (1)
+
+      // do tasks set star
+      val resTaskSetStar = p.tasksSetStar(resLogin.token, resTask.task.id_task, 3)
+      println(resTaskSetStar.task)
+      resTaskSetStar.task.star should be (3)
     }
     /* */
   }

@@ -334,5 +334,62 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
         res.taskList
       }
     }
+
+    it("should perform tasks/set_title request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/set_title",
+          "api_key=key&id_task=23&title=doit&token=sessiontoken&api_sig=ad97a5d79ec959a4c28a1acc2f7584ec",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksSetTitle("sessiontoken", 23, "doit")
+        res.task
+      }
+    }
+
+    it("should perform tasks/set_status request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/set_status",
+          "api_key=key&id_task=23&status=1&token=sessiontoken&api_sig=8651ea9f49103f5431d4a3379681eb8d",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksSetStatus("sessiontoken", 23, 1)
+        res.task
+      }
+    }
+
+    it("should perform tasks/set_star request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/set_star",
+          "api_key=key&id_task=23&star=5&token=sessiontoken&api_sig=4299ad975d04884cd709cf04adc08950",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksSetStar("sessiontoken", 23, 5)
+        res.task
+      }
+    }
   }
 }
