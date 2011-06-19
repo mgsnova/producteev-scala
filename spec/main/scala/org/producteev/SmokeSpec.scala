@@ -171,10 +171,18 @@ class SmokeSpec extends Spec with ShouldMatchers {
       val resLabelList = p.labelsShowlist(resLogin.token)
       println(resLabelList.labelList)
 
+      // do labels create
+      val resLabelCreate = p.labelsCreate(resLogin.token, "testlabel", resDashboardCreate.dashboard.id_dashboard)
+      println(resLabelCreate.label)
+      resLabelCreate.label.title should be ("testlabel")
+
       // do labels view
-      val resLabelView = p.labelsView(resLogin.token, resLabelList.labelList.first.id_label)
+      val resLabelView = p.labelsView(resLogin.token, resLabelCreate.label.id_label)
       println(resLabelView.label)
 
+      // do labels delete
+      val resLabelDelete = p.labelsDelete(resLogin.token, resLabelCreate.label.id_label)
+      println(resLabelDelete.resultSuccess)
     }
     /* */
   }

@@ -242,10 +242,8 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new ResponseTaskView(format, res)
   }
 
-  // Lables
+  // Labels
   /* missing
-    labels/create
-    labels/delete
     labels/tasks
     labels/set_title
   */
@@ -263,6 +261,23 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("token", token)
     val res = apiConnector.get("labels/show_list", params.urlParameter, format)
     new ResponseLabelShowlist(format, res)
+  }
+
+  def labelsCreate(token: String, title: String, idDashboard: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("title", title)
+    params.add("id_dashboard", idDashboard.toString)
+    val res = apiConnector.get("labels/create", params.urlParameter, format)
+    new ResponseLabelView(format, res)
+  }
+
+  def labelsDelete(token: String, idLabel: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_label", idLabel.toString)
+    val res = apiConnector.get("labels/delete", params.urlParameter, format)
+    new ResponseStats(format, res)
   }
 
   // Activities
