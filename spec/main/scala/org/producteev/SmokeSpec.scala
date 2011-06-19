@@ -112,9 +112,9 @@ class SmokeSpec extends Spec with ShouldMatchers {
       println(resMyTaskList.taskList)
 
       // do tasks set title
-      val resTaskSetTitle = p.tasksSetTitle(resLogin.token, resTask.task.id_task, "doit")
+      val resTaskSetTitle = p.tasksSetTitle(resLogin.token, resTask.task.id_task, "do it")
       println(resTaskSetTitle.task)
-      resTaskSetTitle.task.title should be ("doit")
+      resTaskSetTitle.task.title should be ("do it")
 
       // do tasks set status
       val resTaskSetStatus = p.tasksSetStatus(resLogin.token, resTask.task.id_task, 1)

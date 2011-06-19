@@ -1,5 +1,6 @@
 package org.producteev.api
 
+import java.net.URLEncoder
 import scala.collection.mutable.HashMap
 
 import org.producteev.misc.MD5
@@ -21,7 +22,7 @@ class RequestParameters(apiKey: String, apiSecret: String) {
   }
 
   def urlParameter: String = {
-    val keys = map.toList.sortBy({_._1}).map(pair => pair._1 + "=" + pair._2).reduceLeft(_ + "&" + _)
+    val keys = map.toList.sortBy({_._1}).map(pair => pair._1 + "=" + URLEncoder.encode(pair._2, "UTF-8")).reduceLeft(_ + "&" + _)
     keys + "&api_sig=" + signature
   }
 }

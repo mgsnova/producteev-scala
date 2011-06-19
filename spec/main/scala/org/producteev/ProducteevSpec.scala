@@ -153,7 +153,7 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       expecting {
         call(mockApiConnect.get(
           "users/set_timezone",
-          "api_key=key&timezone=Europe/Berlin&token=sessiontoken&api_sig=7457d5229dd8c2875f0dd52e7420c406",
+          "api_key=key&timezone=Europe%2FBerlin&token=sessiontoken&api_sig=7457d5229dd8c2875f0dd52e7420c406",
           "xml"
         )).andReturn(response)
       }
