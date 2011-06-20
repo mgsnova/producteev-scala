@@ -30,5 +30,6 @@ class Task(
   val viewed: Integer,
   val deleted: Integer,
   val nb_note: Integer,
-  val nb_new_note: Integer
+  val nb_new_note: Integer,
+  val labels: List[Label]
 )

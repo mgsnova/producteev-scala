@@ -53,6 +53,7 @@ class XMLParseTaskSpec extends Spec with ShouldMatchers {
     it("should parse xml tree (from view) to a task") {
       val task = XMLParseTask.parse(xmlElementTask)
       assertTask(task)
+      task.labels.size should be (2)
     }
   }
 }

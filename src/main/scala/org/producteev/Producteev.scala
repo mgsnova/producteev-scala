@@ -134,7 +134,7 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/set_responsible
     tasks/unset_responsible
     dashboards/access -> included in dashboards/(view|show_list) ?
-    tasks/labels
+    tasks/labels -> included in tasks/(view|show_list)
     tasks/change_labels
     tasks/set_workspace
     tasks/privacy
