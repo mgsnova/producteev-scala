@@ -26,7 +26,7 @@ class XMLParseTaskSpec extends Spec with ShouldMatchers {
       task.deadline should be ("")
       task.all_day should be (-1)
       task.reminder should be (0)
-      task.repeating_interval should be (-1)
+      task.repeating_interval should be ("")
       task.repeating_value should be (1)
       task.hot should be (0)
       task.progression should be (0)

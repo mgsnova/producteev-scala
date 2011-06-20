@@ -17,7 +17,7 @@ object XMLParseTask {
     var deadline = ""
     var all_day = -1
     var reminder = -1
-    var repeating_interval = -1
+    var repeating_interval = ""
     var repeating_value = -1
     var hot = -1
     var progression = -1
@@ -56,7 +56,7 @@ object XMLParseTask {
         case <deadline>{_deadline}</deadline> => deadline = _deadline.text
         case <all_day>{_all_day}</all_day> => all_day = _all_day.text.toInt
         case <reminder>{_reminder}</reminder> => reminder = _reminder.text.toInt
-        case <repeating_interval>{_repeating_interval}</repeating_interval> => repeating_interval = _repeating_interval.text.toInt
+        case <repeating_interval>{_repeating_interval}</repeating_interval> => repeating_interval = _repeating_interval.text
         case <repeating_value>{_repeating_value}</repeating_value> => repeating_value = _repeating_value.text.toInt
         case <hot>{_hot}</hot> => hot = _hot.text.toInt
         case <progression>{_progression}</progression> => progression = _progression.text.toInt

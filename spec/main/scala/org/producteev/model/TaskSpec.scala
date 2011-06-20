@@ -19,7 +19,7 @@ class TaskSpec extends Spec with ShouldMatchers {
       "",
       -1,
       0,
-      -1,
+      "",
       1,
       0,
       0,
@@ -91,7 +91,7 @@ class TaskSpec extends Spec with ShouldMatchers {
     }
 
     it("should return repeating_interval") {
-      task.repeating_interval should equal(-1)
+      task.repeating_interval should equal("")
     }
 
     it("should return repeating_value") {

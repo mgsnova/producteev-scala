@@ -68,7 +68,6 @@ class SmokeSpec extends Spec with ShouldMatchers {
         resDashboardCreate.dashboard.id_dashboard,
         "blafasel"
       )
-      println(resDashboardSetTitle.dashboard)
       resDashboardSetTitle.dashboard.title should be ("blafasel")
 
       // do dashboards set smart labels
@@ -90,12 +89,10 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       // do users set sort by
       val resUserSetSortBy = p.usersSetSortBy(resLogin.token, 1)
-      println(resUserSetSortBy.user)
       resUserSetSortBy.user.sort_by should be (1)
 
       // do users set timezone
       val resUserSetTimezone = p.usersSetTimezone(resLogin.token, "Europe/Berlin")
-      println(resUserSetTimezone.user)
       resUserSetTimezone.user.timezone should be ("Europe/Berlin")
 
       // do tasks show list
@@ -104,7 +101,6 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       // do task view
       val resTask = p.tasksView(resLogin.token, resTaskList.taskList.first.id_task)
-      println(resTask.task)
       resTask.task.id_task should be (resTaskList.taskList.first.id_task)
 
       // do tasks my tasks 
@@ -113,17 +109,14 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       // do tasks create
       val resTaskCreate = p.tasksCreateSimple(resLogin.token, "do it asap")
-      println(resTaskCreate.task)
       resTaskCreate.task.title should be ("do it asap")
 
       // do tasks set title
       val resTaskSetTitle = p.tasksSetTitle(resLogin.token, resTaskCreate.task.id_task, "do it")
-      println(resTaskSetTitle.task)
       resTaskSetTitle.task.title should be ("do it")
 
       // do tasks set status
       val resTaskSetStatus = p.tasksSetStatus(resLogin.token, resTaskCreate.task.id_task, 1)
-      println(resTaskSetStatus.task)
       resTaskSetStatus.task.status should be (1)
 
       // do tasks set star
@@ -137,7 +130,6 @@ class SmokeSpec extends Spec with ShouldMatchers {
         resTaskCreate.task.id_task,
         "Fri, 23 Apr 2027 16:05:12 +0200"
       )
-      println(resTaskSetDeadline.task)
       resTaskSetDeadline.task.deadline should be ("Fri, 23 Apr 2027 16:05:12 +0200")
       resTaskSetDeadline.task.all_day should be (0)
 
@@ -148,20 +140,33 @@ class SmokeSpec extends Spec with ShouldMatchers {
         "Fri, 23 Apr 2027 17:05:12 +0200",
         1
       )
-      println(resTaskSetDeadline2.task)
       resTaskSetDeadline2.task.deadline should be ("Fri, 23 Apr 2027 17:05:12 +0200")
       // resTaskSetDeadline.task.all_day should be (1) TODO why not 1
 
+      // do tasks set repeating
+      val resTaskSetRepeating = p.tasksSetRepeating(
+        resLogin.token,
+        resTaskCreate.task.id_task,
+        "days",
+        2
+      )
+      resTaskSetRepeating.task.repeating_interval should be ("days")
+      resTaskSetRepeating.task.repeating_value should be (2)
+
+      println(resTaskSetRepeating.task)
       // do tasks unset deadline
       val resTaskUnsetDeadline = p.tasksUnsetDeadline(resLogin.token, resTaskCreate.task.id_task)
-      println(resTaskUnsetDeadline.task)
       resTaskUnsetDeadline.task.deadline should be ("")
       resTaskSetDeadline.task.all_day should be (0)
 
       // do tasks set reminder
       val resTaskSetReminder = p.tasksSetReminder(resLogin.token, resTask.task.id_task, 4)
-      println(resTaskSetReminder.task)
       resTaskSetReminder.task.reminder should be (4)
+
+      // do tasks unset repeating
+      val resTaskUnsetRepeating = p.tasksUnsetRepeating(resLogin.token, resTaskCreate.task.id_task)
+      resTaskUnsetRepeating.task.repeating_interval should be ("")
+      resTaskUnsetRepeating.task.repeating_value should be (1)
 
       // do tasks delete
       val resTaskDelete = p.tasksDelete(resLogin.token, resTaskCreate.task.id_task)
@@ -173,12 +178,10 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       // do labels create
       val resLabelCreate = p.labelsCreate(resLogin.token, "testlabel", resDashboardCreate.dashboard.id_dashboard)
-      println(resLabelCreate.label)
       resLabelCreate.label.title should be ("testlabel")
 
       // do labels set title
       val resLabelSetTitle = p.labelsSetTitle(resLogin.token, resLabelCreate.label.id_label, "testlabel2")
-      println(resLabelSetTitle.label)
       resLabelSetTitle.label.title should be ("testlabel2")
 
       // do labels view

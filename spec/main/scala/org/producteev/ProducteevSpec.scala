@@ -468,6 +468,44 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       }
     }
 
+    it("should perform tasks/set_repeating request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/set_repeating",
+          "api_key=key&id_task=123&repeating_interval=weeks&repeating_value=2&token=sessiontoken&api_sig=e531d69f66102aa40bed665d9ecf3460",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksSetRepeating("sessiontoken", 123, "weeks", 2)
+        res.task
+      }
+    }
+
+    it("should perform tasks/unset_repeating request") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/unset_repeating",
+          "api_key=key&id_task=123&token=sessiontoken&api_sig=a9db8af1b65de6ea2ae6056d4a8c4f40",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksUnsetRepeating("sessiontoken", 123)
+        res.task
+      }
+    }
+
     it("should perform tasks/create request with title") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")

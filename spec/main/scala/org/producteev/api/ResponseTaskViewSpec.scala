@@ -23,7 +23,7 @@ class ResponseTaskViewSpec extends Spec with ShouldMatchers {
       response.task.deadline should be ("")
       response.task.all_day should be (-1)
       response.task.reminder should be (0)
-      response.task.repeating_interval should be (-1)
+      response.task.repeating_interval should be ("")
       response.task.repeating_value should be (1)
       response.task.hot should be (0)
       response.task.progression should be (0)

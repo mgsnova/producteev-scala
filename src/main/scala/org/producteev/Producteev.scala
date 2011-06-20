@@ -133,8 +133,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/my_team_tasks
     tasks/set_responsible
     tasks/unset_responsible
-    tasks/set_repeating
-    tasks/unset_repeating
     dashboards/access -> included in dashboards/(view|show_list) ?
     tasks/labels
     tasks/change_labels
@@ -239,6 +237,24 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("id_task", idTask.toString)
     params.add("reminder", reminder.toString)
     val res = apiConnector.get("tasks/set_reminder", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
+
+  def tasksSetRepeating(token: String, idTask: Integer, interval: String, value: Integer = 1) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    params.add("repeating_interval", interval)
+    params.add("repeating_value", value.toString)
+    val res = apiConnector.get("tasks/set_repeating", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
+
+  def tasksUnsetRepeating(token: String, idTask: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    val res = apiConnector.get("tasks/unset_repeating", params.urlParameter, format)
     new ResponseTaskView(format, res)
   }
 

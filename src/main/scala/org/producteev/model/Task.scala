@@ -14,7 +14,7 @@ class Task(
   val deadline: String,
   val all_day: Integer,
   val reminder: Integer,
-  val repeating_interval: Integer,
+  val repeating_interval: String,
   val repeating_value: Integer,
   val hot: Integer,
   val progression: Integer,
