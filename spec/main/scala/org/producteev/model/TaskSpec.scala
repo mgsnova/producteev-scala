@@ -36,6 +36,7 @@ class TaskSpec extends Spec with ShouldMatchers {
       0,
       0,
       0,
+      List(),
       List()
     )
 
@@ -161,6 +162,10 @@ class TaskSpec extends Spec with ShouldMatchers {
 
     it("should return labels") {
       task.labels.size should equal(0)
+    }
+
+    it("should return notes") {
+      task.notes.size should equal(0)
     }
   }
 }

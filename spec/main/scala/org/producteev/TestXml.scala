@@ -241,6 +241,35 @@ object TestXml {
       </node>
     </labels>"""
 
+  val noteList = """<notes>
+      <node>
+        <note>
+          <id_note>1856485</id_note>
+          <id_task_ext>3254284</id_task_ext>
+          <id_creator>106536</id_creator>
+          <message>yes</message>
+          <file_url/>
+          <file_name/>
+          <time_create>Sat, 25 Jun 2011 16:40:11 +0200</time_create>
+          <time_lastchange>Sat, 26 Jun 2011 16:40:11 +0200</time_lastchange>
+          <deleted>0</deleted>
+        </note>
+      </node>
+      <node>
+        <note>
+          <id_note>1856486</id_note>
+          <id_task_ext>3254284</id_task_ext>
+          <id_creator>106536</id_creator>
+          <message>no</message>
+          <file_url/>
+          <file_name/>
+          <time_create>Sat, 25 Jun 2011 16:40:11 +0200</time_create>
+          <time_lastchange>Sat, 26 Jun 2011 16:40:11 +0200</time_lastchange>
+          <deleted>0</deleted>
+        </note>
+      </node>
+    </notes>"""
+
   val taskView = """<task>
       <id_task>2377422</id_task>
       <id_dashboard>143972</id_dashboard>
@@ -273,7 +302,7 @@ object TestXml {
       <nb_note>0</nb_note>
       <nb_new_note>0</nb_new_note>
       """ + labelList + """
-      <notes></notes>
+      """ + noteList + """
     </task>"""
 
   val taskListItem = """<node><task>
@@ -444,33 +473,4 @@ object TestXml {
         <deleted>0</deleted>
       </note>
     </node>"""
-
-  val noteList = """<notes>
-      <node>
-        <note>
-          <id_note>1856485</id_note>
-          <id_task_ext>3254284</id_task_ext>
-          <id_creator>106536</id_creator>
-          <message>yes</message>
-          <file_url/>
-          <file_name/>
-          <time_create>Sat, 25 Jun 2011 16:40:11 +0200</time_create>
-          <time_lastchange>Sat, 26 Jun 2011 16:40:11 +0200</time_lastchange>
-          <deleted>0</deleted>
-        </note>
-      </node>
-      <node>
-        <note>
-          <id_note>1856486</id_note>
-          <id_task_ext>3254284</id_task_ext>
-          <id_creator>106536</id_creator>
-          <message>no</message>
-          <file_url/>
-          <file_name/>
-          <time_create>Sat, 25 Jun 2011 16:40:11 +0200</time_create>
-          <time_lastchange>Sat, 26 Jun 2011 16:40:11 +0200</time_lastchange>
-          <deleted>0</deleted>
-        </note>
-      </node>
-    </notes>"""
 }

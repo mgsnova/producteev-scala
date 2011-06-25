@@ -2,6 +2,7 @@ package org.producteev.xml
 
 import org.producteev.model.Task
 import org.producteev.model.Label
+import org.producteev.model.Note
 
 object XMLParseTask {
   def parse(xmlElement: scala.xml.Node) = {
@@ -36,6 +37,7 @@ object XMLParseTask {
     var nb_note = -1
     var nb_new_note = -1
     var label_list = List[Label]()
+    var note_list = List[Note]()
 
     val entries = xmlElement match {
       case <task>{entries@_*}</task> => entries
@@ -78,7 +80,9 @@ object XMLParseTask {
         case <labels>{labels@_*}</labels> => {
           label_list = labels.filter(label => label.child.size > 0).map(label => XMLParseLabel.parse(label)).toList
         }
-        // TODO notes
+        case <notes>{notes@_*}</notes> => {
+          note_list = notes.filter(note => note.child.size > 0).map(note => XMLParseNote.parse(note)).toList
+        }
         case _ => 
       }
     }
@@ -86,6 +90,6 @@ object XMLParseTask {
     new Task(id_task, id_dashboard, id_creator, id_responsible, assign_by, time_created, 
       title, status, star, vote, deadline, all_day, reminder, repeating_interval, 
       repeating_value, hot, progression, public, uid_lastchange, time_lastchange, 
-      from, time_status, r, w, x, d, viewed, deleted, nb_note, nb_new_note, label_list)
+      from, time_status, r, w, x, d, viewed, deleted, nb_note, nb_new_note, label_list, note_list)
   }
 }
