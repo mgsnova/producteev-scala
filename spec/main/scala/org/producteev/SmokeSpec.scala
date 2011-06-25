@@ -161,7 +161,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
       resTaskSetDeadline.task.all_day should be (0)
 
       // do tasks set reminder
-      val resTaskSetReminder = p.tasksSetReminder(resLogin.token, resTask.task.id_task, 4)
+      val resTaskSetReminder = p.tasksSetReminder(resLogin.token, resTaskCreate.task.id_task, 4)
       resTaskSetReminder.task.reminder should be (4)
 
       // do tasks unset repeating
@@ -188,6 +188,20 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // do labels view
       val resLabelView = p.labelsView(resLogin.token, resLabelCreate.label.id_label)
       println(resLabelView.label)
+
+      // do tasks change labels
+      val resTaskChangeLabels = p.tasksChangeLabels(
+        resLogin.token,
+        resTaskCreate.task.id_task,
+        List(resLabelList.labelList.first.id_label)//, resLabelList.labelList.last.id_label)
+      )
+      resTaskChangeLabels.task.labels.size should be (1)
+
+      // do labels tasks
+      val resLabelsTasks = p.labelsTasks(resLogin.token, resLabelList.labelList.first.id_label)
+      println(resLabelsTasks.taskList)
+      resLabelsTasks.taskList.size should be (1)
+
 
       // do labels delete
       val resLabelDelete = p.labelsDelete(resLogin.token, resLabelCreate.label.id_label)

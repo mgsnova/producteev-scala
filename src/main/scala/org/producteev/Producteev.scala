@@ -135,11 +135,10 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/unset_responsible
     dashboards/access -> included in dashboards/(view|show_list) ?
     tasks/labels -> included in tasks/(view|show_list)
-    tasks/change_labels
     tasks/set_workspace
     tasks/privacy
-    tasks/note_view
-    tasks/notes_get
+    tasks/note_view -> included in tasks/(view/show_list) ?
+    tasks/notes_get -> included in tasks/(view/show_list) ?
     tasks/note_create
     tasks/note_delete
     tasks/activity_view
@@ -258,10 +257,17 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new ResponseTaskView(format, res)
   }
 
+  // TODO how to serialize list of ids?
+  def tasksChangeLabels(token: String, idTask: Integer, labels: List[Integer]) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    params.add("id_label", labels.map(label => label.toString).reduceLeft(_ + ", " + _))
+    val res = apiConnector.get("tasks/change_labels", params.urlParameter, format)
+    new ResponseTaskView(format, res)
+  }
+
   // Labels
-  /* missing
-    labels/tasks
-  */
 
   def labelsView(token: String, idLabel: Integer) = {
     val params = newReqParam
@@ -302,6 +308,14 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("title", title)
     val res = apiConnector.get("labels/set_title", params.urlParameter, format)
     new ResponseLabelView(format, res)
+  }
+
+  def labelsTasks(token: String, idLabel: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_label", idLabel.toString)
+    val res = apiConnector.get("labels/tasks", params.urlParameter, format)
+    new ResponseTaskShowlist(format, res)
   }
 
   // Activities
