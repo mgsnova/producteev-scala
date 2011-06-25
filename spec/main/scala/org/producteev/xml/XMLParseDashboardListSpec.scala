@@ -11,14 +11,14 @@ class XMLParseDashboardListSpec extends Spec with ShouldMatchers {
     val xmlElement = XML.loadString(TestXml.dashboardList)   
 
     it("should parse list of dashboard out of xml tree") {
-      val dashboard_list = XMLParseDashboardList.parse(xmlElement)
-      dashboard_list.size should equal(2)
+      val dashboardList = XMLParseDashboardList.parse(xmlElement)
+      dashboardList.size should equal(2)
 
-      dashboard_list.head.id_dashboard should equal(243972)
-      dashboard_list.head.title should equal("privat")
+      dashboardList.head.id_dashboard should equal(243972)
+      dashboardList.head.title should equal("privat")
 
-      dashboard_list.last.id_dashboard should equal(250322)
-      dashboard_list.last.title should equal("second")
+      dashboardList.last.id_dashboard should equal(250322)
+      dashboardList.last.title should equal("second")
     }
   }
 }
