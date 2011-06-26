@@ -60,7 +60,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
         resLogin.token,
         "testboard"
       )
-      println(resDashboardCreate.dashboard)
+      resDashboardCreate.dashboard.title should be ("testboard")
 
       // do dashboards set title
       val resDashboardSetTitle = p.dashboardsSetTitle(
@@ -85,7 +85,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
         resLogin.token,
         resDashboardCreate.dashboard.id_dashboard
       )
-      println(resDashboardDelete.resultSuccess)
+      resDashboardDelete.resultSuccess should be (true)
 
       // do users set sort by
       val resUserSetSortBy = p.usersSetSortBy(resLogin.token, 1)
@@ -121,7 +121,6 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       // do tasks set star
       val resTaskSetStar = p.tasksSetStar(resLogin.token, resTaskCreate.task.id_task, 3)
-      println(resTaskSetStar.task)
       resTaskSetStar.task.star should be (3)
 
       // do tasks set deadline
@@ -153,7 +152,6 @@ class SmokeSpec extends Spec with ShouldMatchers {
       resTaskSetRepeating.task.repeating_interval should be ("days")
       resTaskSetRepeating.task.repeating_value should be (2)
 
-      println(resTaskSetRepeating.task)
       // do tasks unset deadline
       val resTaskUnsetDeadline = p.tasksUnsetDeadline(resLogin.token, resTaskCreate.task.id_task)
       resTaskUnsetDeadline.task.deadline should be ("")
@@ -170,7 +168,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       // do tasks delete
       val resTaskDelete = p.tasksDelete(resLogin.token, resTaskCreate.task.id_task)
-      println(resTaskDelete.resultSuccess)
+      resTaskDelete.resultSuccess should be (true)
 
       // do labels show list
       val resLabelList = p.labelsShowlist(resLogin.token)
@@ -196,6 +194,18 @@ class SmokeSpec extends Spec with ShouldMatchers {
       )
       resTaskChangeLabels.task.labels.size should be (1)
 
+      // do task note create
+      val resTaskNoteCreate = p.tasksNoteCreate(
+        resLogin.token,
+        resTaskCreate.task.id_task,
+        "a note"
+      )
+      resTaskNoteCreate.note.message should be ("a note")
+
+      // do task note delete
+      val resTaskNoteDelete = p.tasksNoteDelete(resLogin.token, resTaskNoteCreate.note.id_note)
+      resTaskNoteDelete.resultSuccess should be (true)
+
       // do labels tasks
       val resLabelsTasks = p.labelsTasks(resLogin.token, resLabelList.labelList.first.id_label)
       println(resLabelsTasks.taskList)
@@ -203,7 +213,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
 
       // do labels delete
       val resLabelDelete = p.labelsDelete(resLogin.token, resLabelCreate.label.id_label)
-      println(resLabelDelete.resultSuccess)
+      resLabelDelete.resultSuccess should be (true)
     }
     /* */
   }

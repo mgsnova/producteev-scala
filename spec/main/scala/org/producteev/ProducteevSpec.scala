@@ -582,6 +582,44 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       }
     }
 
+    it("should perform tasks/note_create") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.noteView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/note_create",
+          "api_key=key&id_task=321&message=noted&token=sessiontoken&api_sig=58a169863c8fa8d840deaeef602a2a2a",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksNoteCreate("sessiontoken", 321, "noted")
+        res.note
+      }
+    }
+
+    it("should perform tasks/note_delete") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.statsSuccess)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/note_delete",
+          "api_key=key&id_note=32123&token=sessiontoken&api_sig=253dcbb144cc441e65129e6874eed0f9",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksNoteDelete("sessiontoken", 32123)
+        res.resultSuccess
+      }
+    }
+
     it("should perform labels/show_list") {
       val mockApiConnect = mock[ApiConnect]
       val producteev = new Producteev(mockApiConnect, credentials, "xml")

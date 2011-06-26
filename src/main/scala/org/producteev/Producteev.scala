@@ -139,8 +139,6 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     tasks/privacy
     tasks/note_view -> included in tasks/(view/show_list) ?
     tasks/notes_get -> included in tasks/(view/show_list) ?
-    tasks/note_create
-    tasks/note_delete
     tasks/activity_view
     tasks/activities_get
   */
@@ -265,6 +263,23 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     params.add("id_label", labels.map(label => label.toString).reduceLeft(_ + ", " + _))
     val res = apiConnector.get("tasks/change_labels", params.urlParameter, format)
     new ResponseTaskView(format, res)
+  }
+
+  def tasksNoteCreate(token: String, idTask: Integer, message: String) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_task", idTask.toString)
+    params.add("message", message)
+    val res = apiConnector.get("tasks/note_create", params.urlParameter, format)
+    new ResponseNoteView(format, res)
+  }
+
+  def tasksNoteDelete(token: String, idNote: Integer) = {
+    val params = newReqParam
+    params.add("token", token)
+    params.add("id_note", idNote.toString)
+    val res = apiConnector.get("tasks/note_delete", params.urlParameter, format)
+    new ResponseStats(format, res)
   }
 
   // Labels
