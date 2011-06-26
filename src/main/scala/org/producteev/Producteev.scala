@@ -18,7 +18,7 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
 
   // Users
   /* missing
-    users/colleagues
+    users/colleagues -> included in users/(show_list|view) ?
     users/signup
     users/attach_facebook_id
     users/detach_facebook_id
