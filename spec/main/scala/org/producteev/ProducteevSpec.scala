@@ -571,13 +571,32 @@ class ProducteevSpec extends Spec with ShouldMatchers with EasyMockSugar {
       expecting {
         call(mockApiConnect.get(
           "tasks/change_labels",
-          "api_key=key&id_label=1%2C+42&id_task=321&token=sessiontoken&api_sig=4de4c5bba6c08fea5a1af5bc1ede7d72",
+          "api_key=key&id_task=321&token=sessiontoken&id_label[]=1&id_label[]=42&api_sig=38a56413b3e85dd7e48edbd16cc9d744",
           "xml"
         )).andReturn(response)
       }
     
       whenExecuting(mockApiConnect) {
         val res = producteev.tasksChangeLabels("sessiontoken", 321, List(1, 42))
+        res.task
+      }
+    }
+
+    it("should perform tasks/change_labels emtpy") {
+      val mockApiConnect = mock[ApiConnect]
+      val producteev = new Producteev(mockApiConnect, credentials, "xml")
+      val response = new ApiResponse(200, TestXml.taskView)
+
+      expecting {
+        call(mockApiConnect.get(
+          "tasks/change_labels",
+          "api_key=key&id_task=321&token=sessiontoken&api_sig=38a56413b3e85dd7e48edbd16cc9d744",
+          "xml"
+        )).andReturn(response)
+      }
+    
+      whenExecuting(mockApiConnect) {
+        val res = producteev.tasksChangeLabels("sessiontoken", 321, List())
         res.task
       }
     }

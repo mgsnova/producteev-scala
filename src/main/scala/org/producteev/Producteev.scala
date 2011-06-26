@@ -255,12 +255,11 @@ class Producteev(apiConnector: ApiConnect, credentials: ApiCredentials, format: 
     new ResponseTaskView(format, res)
   }
 
-  // TODO how to serialize list of ids?
   def tasksChangeLabels(token: String, idTask: Integer, labels: List[Integer]) = {
     val params = newReqParam
     params.add("token", token)
     params.add("id_task", idTask.toString)
-    params.add("id_label", labels.map(label => label.toString).reduceLeft(_ + ", " + _))
+    if (labels.size > 0) labels.foreach{ label => params.add("id_label[]", label.toString) }
     val res = apiConnector.get("tasks/change_labels", params.urlParameter, format)
     new ResponseTaskView(format, res)
   }

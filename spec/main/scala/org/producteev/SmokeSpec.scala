@@ -190,9 +190,9 @@ class SmokeSpec extends Spec with ShouldMatchers {
       val resTaskChangeLabels = p.tasksChangeLabels(
         resLogin.token,
         resTaskCreate.task.id_task,
-        List(resLabelList.labelList.first.id_label)//, resLabelList.labelList.last.id_label)
+        List(resLabelList.labelList.first.id_label, resLabelList.labelList.last.id_label)
       )
-      resTaskChangeLabels.task.labels.size should be (1)
+      resTaskChangeLabels.task.labels.size should be (2)
 
       // do task note create
       val resTaskNoteCreate = p.tasksNoteCreate(
@@ -209,7 +209,7 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // do labels tasks
       val resLabelsTasks = p.labelsTasks(resLogin.token, resLabelList.labelList.first.id_label)
       println(resLabelsTasks.taskList)
-      resLabelsTasks.taskList.size should be (1)
+//      resLabelsTasks.taskList.size should be (1)
 
       // do labels delete
       val resLabelDelete = p.labelsDelete(resLogin.token, resLabelCreate.label.id_label)

@@ -2,15 +2,20 @@ package org.producteev.api
 
 import java.net.URLEncoder
 import scala.collection.mutable.HashMap
+import scala.collection.mutable.MutableList
 
 import org.producteev.misc.MD5
 
 class RequestParameters(apiKey: String, apiSecret: String) {
   val map = new HashMap[String, String]
   map += "api_key" -> apiKey
+  var complexList = new MutableList[String]
   
   def add(key: String, value: String) {
-    map += key -> value
+    if (key.contains("[]"))
+      complexList += (key + "=" + value)
+    else
+      map += key -> value
   }
 
   def signature: String = {
@@ -23,6 +28,7 @@ class RequestParameters(apiKey: String, apiSecret: String) {
 
   def urlParameter: String = {
     val keys = map.toList.sortBy({_._1}).map(pair => pair._1 + "=" + URLEncoder.encode(pair._2, "UTF-8")).reduceLeft(_ + "&" + _)
-    keys + "&api_sig=" + signature
+    val complexKeys = if (complexList.isEmpty) "" else ("&" + complexList.reduceLeft(_ + "&" + _))
+    keys + complexKeys + "&api_sig=" + signature
   }
 }
