@@ -3,10 +3,8 @@
     <description>Scala API for Producteev web service</description>
 
     <property name="src.dir" value="${basedir}/src"/>
-    <property name="src.spec.dir" value="${basedir}/spec"/>
     <property name="build.dir" value="${basedir}/build"/>
     <property name="build.classes.dir" value="${build.dir}/classes"/>
-    <property name="build.spec.classes.dir" value="${build.dir}/spec/classes"/>
 
     <target name="init">
         <property environment="env"/>
@@ -17,11 +15,11 @@
 
         <property name="scala-library.jar" value="${scala.home}/lib/scala-library.jar"/>
         <property name="scala-compiler.jar" value="${scala.home}/lib/scala-compiler.jar"/>
-        <property name="scalatest.jar" value="vendor/scalatest-1.4.1.jar"/>
-        <property name="easymock.jar" value="vendor/easymock-3.0.jar"/>
-        <property name="cglib.jar" value="vendor/cglib-2.2.2.jar"/>
-        <property name="objenesis.jar" value="vendor/objenesis-1.2.jar"/>
-        <property name="asm.jar" value="vendor/asm-all-3.3.1.jar"/>
+        <property name="scalatest.jar" value="lib/scalatest-1.4.1.jar"/>
+        <property name="easymock.jar" value="lib/easymock-3.0.jar"/>
+        <property name="cglib.jar" value="lib/cglib-2.2.2.jar"/>
+        <property name="objenesis.jar" value="lib/objenesis-1.2.jar"/>
+        <property name="asm.jar" value="lib/asm-all-3.3.1.jar"/>
 
         <path id="build.classpath">
             <pathelement location="${scala-library.jar}"/>
@@ -49,7 +47,6 @@
 
         <mkdir dir="${build.dir}" />
         <mkdir dir="${build.classes.dir}" />
-        <mkdir dir="${build.spec.classes.dir}" />
     </target>
 
     <target name="build" depends="init">
@@ -62,18 +59,6 @@
                 addparams="-make:transitive -dependencyfile ${build.dir}/.scala_dependencies"
                 >
             <src path="${basedir}/src"/> 
-            <!--include name="compile/**/*.scala"/-->
-            <!--exclude name="forget/**/*.scala"/-->
-        </scalac>
-        <scalac srcdir="${src.spec.dir}"
-                destdir="${build.spec.classes.dir}"
-                classpathref="build.classpath"
-                force="yes"
-                addparams="-make:transitive -dependencyfile ${build.dir}/.scala_dependencies"
-                >
-            <src path="${basedir}/src"/> 
-            <!--include name="compile/**/*.scala"/-->
-            <!--exclude name="forget/**/*.scala"/-->
         </scalac>
     </target>
 
@@ -83,7 +68,7 @@
         </taskdef>
         <scalatest>
             <runpath>
-                <pathelement location="build/spec/classes"/>
+                <pathelement location="build/classes"/>
             </runpath>
         </scalatest>
     </target> 
