@@ -1,5 +1,6 @@
 *.class
 *.swp
+producteev-scala.jar
 .scala_dependencies
 target/
 lib_managed/

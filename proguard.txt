@@ -1,0 +1,20 @@
+-injars target/scala-2.8.1.final/classes
+-injars '/usr/local/Cellar/scala/2.8.1/libexec/lib/scala-library.jar'
+-outjar producteev-scala.jar
+-libraryjars /Applications/dev/android/android-sdk-mac_x86/platforms/android-8/android.jar
+
+-dontpreverify
+-repackageclasses ''
+-allowaccessmodification
+-optimizations !code/simplification/arithmetic
+
+-dontwarn
+-dontoptimize
+-dontobfuscate
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,
+                SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
+                -keep public class org.producteev.** {
+                      public protected *;
+                }
