@@ -8,7 +8,7 @@ class ApiConnect(apiUrlConnection: ApiURLCreator) {
       new ApiResponse(urlConn.responseCode, urlConn.inputString)
     } catch {
       case e: Exception => {
-        new ApiResponse(urlConn.responseCode, urlConn.errorString)
+        new ApiResponse(urlConn.responseCode, "")//urlConn.errorString) //getting error here?!
       }
     }
   }

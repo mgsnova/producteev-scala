@@ -3,7 +3,7 @@ package org.producteev.api
 import scala.xml._
 
 class Response(format: String, response: ApiResponse) {
-  val xmlContent = format match {
+  def xmlContent = format match {
     case "xml" => XML.loadString(response.content.trim)
   }
 

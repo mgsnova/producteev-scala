@@ -214,6 +214,10 @@ class SmokeSpec extends Spec with ShouldMatchers {
       // do labels delete
       val resLabelDelete = p.labelsDelete(resLogin.token, resLabelCreate.label.id_label)
       resLabelDelete.resultSuccess should be (true)
+
+      // perform invalid login
+      val resLogin2 = p.usersLogin("nouser", "nopass")
+      resLogin2.success should be (false)
     }
     /* */
   }
