@@ -3,6 +3,7 @@ package org.producteev.api
 import scala.xml._
 
 class Response(format: String, response: ApiResponse) {
+  def responseCode = response.code
   def rawContent = response.content
 
   def xmlContent = format match {
