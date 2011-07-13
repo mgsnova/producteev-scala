@@ -19,7 +19,7 @@ class ApiConnectSpec extends Spec with ShouldMatchers with EasyMockSugar {
       expecting {
         call(mockURLCreator.connection("url", "param", "xml")).andReturn(mockURLConnectionWrapper)
         call(mockURLConnectionWrapper.responseCode).andReturn(200)
-        call(mockURLConnectionWrapper.inputString).andReturn("some xml")
+        call(mockURLConnectionWrapper.input).andReturn("some xml")
       }
 
       whenExecuting(mockURLCreator, mockURLConnectionWrapper) {

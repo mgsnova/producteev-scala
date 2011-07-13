@@ -5,13 +5,15 @@ class ApiConnect(apiUrlConnection: ApiURLCreator) {
     val urlConn = apiUrlConnection.connection(path, parameter, format)
 
     try {    
-      new ApiResponse(urlConn.responseCode, urlConn.inputString)
+      new ApiResponse(urlConn.responseCode, urlConn.input)
     } catch {
       case e: Exception => {
-        if(urlConn.responseCode > 0) {
-          new ApiResponse(urlConn.responseCode, urlConn.errorString)
+        val input = urlConn.input
+        
+        if(input.length > 0) {
+          new ApiResponse(urlConn.responseCode, input)
         } else {
-          new ApiResponse(urlConn.responseCode, "error: " + e.getMessage.mkString)
+          new ApiResponse(urlConn.responseCode, "error" + e.getMessage.mkString)
         }
       }
     }

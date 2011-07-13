@@ -8,14 +8,23 @@ class URLConnectionWrapper(url: URL) {
   var connection = url.openConnection.asInstanceOf[HttpsURLConnection]
   connection.setRequestProperty("Accept-Charset", "utf-8");
 
+  def responseCode: Int = connection.getResponseCode
   def inputString: String = Source.fromInputStream(connection.getInputStream).mkString
-  def errorString: String = {
-    val errorStream = connection.getErrorStream
-    if(errorStream == null) {
-      Source.fromInputStream(errorStream).mkString
-    } else {
-      ""
+  def errorString: String = Source.fromInputStream(connection.getErrorStream).mkString
+
+  def input: String = {
+    try {
+      return inputString
+    } catch {
+      case e: Exception => {
+        try {
+          return errorString
+        } catch {
+          case e: Exception => {
+            return ""
+          }
+        }
+      }
     }
   }
-  def responseCode: Int = connection.getResponseCode
 }
