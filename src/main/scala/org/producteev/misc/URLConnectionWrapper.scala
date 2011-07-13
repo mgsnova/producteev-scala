@@ -9,6 +9,13 @@ class URLConnectionWrapper(url: URL) {
   connection.setRequestProperty("Accept-Charset", "utf-8");
 
   def inputString: String = Source.fromInputStream(connection.getInputStream).mkString
-  def errorString: String = Source.fromInputStream(connection.getErrorStream).mkString
+  def errorString: String = {
+    val errorStream = connection.getErrorStream
+    if(errorStream == null) {
+      Source.fromInputStream(errorStream).mkString
+    } else {
+      ""
+    }
+  }
   def responseCode: Int = connection.getResponseCode
 }

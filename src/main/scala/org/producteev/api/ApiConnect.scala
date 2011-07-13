@@ -8,7 +8,11 @@ class ApiConnect(apiUrlConnection: ApiURLCreator) {
       new ApiResponse(urlConn.responseCode, urlConn.inputString)
     } catch {
       case e: Exception => {
-        new ApiResponse(urlConn.responseCode, "error: " + e.getMessage.mkString)//urlConn.errorString) //getting error here?!
+        if(urlConn.responseCode > 0) {
+          new ApiResponse(urlConn.responseCode, urlConn.errorString)
+        } else {
+          new ApiResponse(urlConn.responseCode, "error: " + e.getMessage.mkString)
+        }
       }
     }
   }
