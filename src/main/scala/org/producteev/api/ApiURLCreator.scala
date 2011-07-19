@@ -11,7 +11,7 @@ class ApiURLCreator {
     new URL(host + path + "." + format + "?" + parameter)
   }
 
-  def connection(path: String, parameter: String, format: String): URLConnectionWrapper = {
-    new URLConnectionWrapper(create(path, parameter, format))
+  def connection(path: String, parameter: String, format: String, requestMethod: String): URLConnectionWrapper = {
+    new URLConnectionWrapper(create(path, parameter, format), requestMethod)
   }
 }

@@ -1,9 +1,9 @@
 package org.producteev.api
 
-class ApiConnect(apiUrlConnection: ApiURLCreator) {
-  def get(path: String, parameter: String, format: String): ApiResponse = {
-    val urlConn = apiUrlConnection.connection(path, parameter, format)
+import org.producteev.misc.URLConnectionWrapper
 
+class ApiConnect(apiUrlConnection: ApiURLCreator) {
+  private def createResponse(urlConn: URLConnectionWrapper): ApiResponse = {
     try {    
       new ApiResponse(urlConn.responseCode, urlConn.input)
     } catch {
@@ -17,5 +17,19 @@ class ApiConnect(apiUrlConnection: ApiURLCreator) {
         }
       }
     }
+  }
+
+  private def createResponseDoubleTry(urlConn: URLConnectionWrapper): ApiResponse = {
+    val response = createResponse(urlConn)
+    if(response.code == -1) {
+      createResponse(urlConn)
+    } else {
+      response
+    }
+  }
+
+  def get(path: String, parameter: String, format: String): ApiResponse = {
+    val urlConn = apiUrlConnection.connection(path, parameter, format, "GET")
+    createResponseDoubleTry(urlConn)
   }
 }
