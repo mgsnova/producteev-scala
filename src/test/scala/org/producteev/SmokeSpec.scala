@@ -8,7 +8,7 @@ import org.producteev.api._
 
 class SmokeSpec extends Spec with ShouldMatchers {
   describe("Testing against live api") {
-    /* */
+    /* 
     it("should smoke") {
       val home = System.getProperty("user.home")
       val credentials = ApiCredentials.fromFiles(
@@ -71,14 +71,13 @@ class SmokeSpec extends Spec with ShouldMatchers {
       resDashboardSetTitle.dashboard.title should be ("blafasel")
 
       // do dashboards set smart labels
-      /* TODO not working
-      val resDashboardSetSmartLabels = p.dashboardsSetSmartLabels(
-        resLogin.token,
-        resDashboardCreate.dashboard.id_dashboard,
-        1
-      )
-      println(resDashboardSetSmartLabels.dashboard)
-      */ 
+      // TODO not working
+      //val resDashboardSetSmartLabels = p.dashboardsSetSmartLabels(
+      //  resLogin.token,
+      //  resDashboardCreate.dashboard.id_dashboard,
+      //  1
+      //)
+      //println(resDashboardSetSmartLabels.dashboard) 
 
       // do dashboard delete
       val resDashboardDelete = p.dashboardsDelete(
@@ -219,6 +218,6 @@ class SmokeSpec extends Spec with ShouldMatchers {
       val resLogin2 = p.usersLogin("nouser", "nopass")
       resLogin2.success should be (false)
     }
-    /* */
+     */
   }
 }
